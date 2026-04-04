@@ -1,0 +1,10 @@
+[package]
+name = "trainerai_overlay-ui"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# We use the "web" feature because Tauri loads this as a web page inside the native window
+dioxus = { version = "0.7", features = ["web"] } 
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

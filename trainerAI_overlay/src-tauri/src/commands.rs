@@ -1,6 +1,13 @@
 use tauri::command;
 
 #[command]
+pub fn set_clickthrough(window: tauri::WebviewWindow, enabled: bool) -> Result<(), String> {
+    window
+        .set_ignore_cursor_events(enabled)
+        .map_err(|e| e.to_string())
+}
+
+#[command]
 pub async fn start_capture() -> Result<String, String> {
     // Aici vei inițializa captura de ecran (WGC)
     println!("Starting screen capture...");

@@ -38,3 +38,19 @@ def test_settings_database_url_prefers_explicit_value(monkeypatch) -> None:
     settings = Settings()
 
     assert settings.resolved_database_url() == explicit_url
+
+
+def test_settings_derives_database_url_from_parts(monkeypatch) -> None:
+    _clear_env(monkeypatch)
+
+    monkeypatch.setenv("POSTGRES_HOST", "db_host")
+    monkeypatch.setenv("POSTGRES_PORT", "5432")
+    monkeypatch.setenv("POSTGRES_USER", "db_user")
+    monkeypatch.setenv("POSTGRES_PASSWORD", "db_password")
+    monkeypatch.setenv("POSTGRES_DB", "db_name")
+
+    settings = Settings()
+    expected = "postgresql+asyncpg://db_user:db_password@db_host:5432/db_name"
+
+    assert settings.database_url == expected
+    assert settings.resolved_database_url() == expected

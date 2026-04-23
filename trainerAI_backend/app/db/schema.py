@@ -44,6 +44,7 @@ SCHEMA_STATEMENTS = (
         guidance_priority TEXT,
         prompt_used TEXT,
         response_given TEXT,
+        context_retrieved JSONB,
         user_action_after TEXT,
         outcome TEXT,
         confidence DOUBLE PRECISION,
@@ -51,6 +52,24 @@ SCHEMA_STATEMENTS = (
         source TEXT DEFAULT 'user_confirmed',
         created_at TIMESTAMPTZ DEFAULT now()
     );
+    """,
+    """
+    ALTER TABLE training_examples
+    -- Backward-compatible migration for databases created before Phase 5.
+    ADD COLUMN IF NOT EXISTS context_retrieved JSONB;
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS perception_states (
+        id SERIAL PRIMARY KEY,
+        session_id TEXT NOT NULL,
+        payload JSONB NOT NULL,
+        observed_at TIMESTAMPTZ NOT NULL,
+        created_at TIMESTAMPTZ DEFAULT now()
+    );
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_perception_states_session_observed
+    ON perception_states (session_id, observed_at DESC);
     """,
 )
 

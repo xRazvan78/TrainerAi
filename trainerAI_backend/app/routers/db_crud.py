@@ -1,3 +1,5 @@
+from typing import Any
+
 import asyncpg
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response
 from pydantic import BaseModel, Field
@@ -64,6 +66,7 @@ class TrainingExampleCreate(BaseModel):
     guidance_priority: str | None = None
     prompt_used: str | None = None
     response_given: str | None = None
+    context_retrieved: list[dict[str, Any]] | None = None
     user_action_after: str | None = None
     outcome: str | None = None
     confidence: float | None = None
@@ -79,6 +82,7 @@ class TrainingExampleUpdate(BaseModel):
     guidance_priority: str | None = None
     prompt_used: str | None = None
     response_given: str | None = None
+    context_retrieved: list[dict[str, Any]] | None = None
     user_action_after: str | None = None
     outcome: str | None = None
     confidence: float | None = None
@@ -261,6 +265,7 @@ async def create_training_example_endpoint(
             guidance_priority=payload.guidance_priority,
             prompt_used=payload.prompt_used,
             response_given=payload.response_given,
+            context_retrieved=payload.context_retrieved,
             user_action_after=payload.user_action_after,
             outcome=payload.outcome,
             confidence=payload.confidence,
@@ -307,6 +312,7 @@ async def update_training_example_endpoint(
         guidance_priority=payload.guidance_priority,
         prompt_used=payload.prompt_used,
         response_given=payload.response_given,
+        context_retrieved=payload.context_retrieved,
         user_action_after=payload.user_action_after,
         outcome=payload.outcome,
         confidence=payload.confidence,

@@ -276,6 +276,46 @@ async def query_similar_embeddings(
     return [dict(row) for row in rows]
 
 
+async def create_perception_state(
+    pool: asyncpg.Pool,
+    session_id: str,
+    payload: dict[str, Any],
+    observed_at: str,
+) -> dict[str, Any] | None:
+    payload_json = json.dumps(payload)
+
+    async with pool.acquire() as connection:
+        record = await connection.fetchrow(
+            """
+            INSERT INTO perception_states (session_id, payload, observed_at)
+            VALUES ($1, $2::jsonb, $3::timestamptz)
+            RETURNING id, session_id, payload, observed_at, created_at;
+            """,
+            session_id,
+            payload_json,
+            observed_at,
+        )
+    return _record_to_dict(record)
+
+
+async def get_latest_perception_state(
+    pool: asyncpg.Pool,
+    session_id: str,
+) -> dict[str, Any] | None:
+    async with pool.acquire() as connection:
+        record = await connection.fetchrow(
+            """
+            SELECT id, session_id, payload, observed_at, created_at
+            FROM perception_states
+            WHERE session_id = $1
+            ORDER BY observed_at DESC, id DESC
+            LIMIT 1;
+            """,
+            session_id,
+        )
+    return _record_to_dict(record)
+
+
 async def create_training_example(
     pool: asyncpg.Pool,
     doc_id: str,
@@ -286,30 +326,35 @@ async def create_training_example(
     guidance_priority: str | None = None,
     prompt_used: str | None = None,
     response_given: str | None = None,
+    context_retrieved: list[dict[str, Any]] | None = None,
     user_action_after: str | None = None,
     outcome: str | None = None,
     confidence: float | None = None,
     time_to_action_ms: int | None = None,
     source: str = "user_confirmed",
 ) -> dict[str, Any] | None:
+    context_retrieved_json = None
+    if context_retrieved is not None:
+        context_retrieved_json = json.dumps(context_retrieved)
+
     async with pool.acquire() as connection:
         record = await connection.fetchrow(
             """
             INSERT INTO training_examples (
                 doc_id, session_id, context_label, active_tool,
                 error_type, guidance_priority, prompt_used,
-                response_given, user_action_after, outcome,
-                confidence, time_to_action_ms, source
+                response_given, context_retrieved, user_action_after,
+                outcome, confidence, time_to_action_ms, source
             )
             VALUES (
                 $1, $2, $3, $4,
                 $5, $6, $7,
-                $8, $9, $10,
-                $11, $12, $13
+                $8, $9::jsonb, $10,
+                $11, $12, $13, $14
             )
             RETURNING doc_id, session_id, context_label, active_tool,
                       error_type, guidance_priority, prompt_used,
-                      response_given, user_action_after, outcome,
+                             response_given, context_retrieved, user_action_after, outcome,
                       confidence, time_to_action_ms, source, created_at;
             """,
             doc_id,
@@ -320,6 +365,7 @@ async def create_training_example(
             guidance_priority,
             prompt_used,
             response_given,
+            context_retrieved_json,
             user_action_after,
             outcome,
             confidence,
@@ -335,7 +381,7 @@ async def get_training_example(pool: asyncpg.Pool, doc_id: str) -> dict[str, Any
             """
             SELECT doc_id, session_id, context_label, active_tool,
                    error_type, guidance_priority, prompt_used,
-                   response_given, user_action_after, outcome,
+                   response_given, context_retrieved, user_action_after, outcome,
                    confidence, time_to_action_ms, source, created_at
             FROM training_examples
             WHERE doc_id = $1;
@@ -353,7 +399,7 @@ async def list_training_examples(
             """
             SELECT doc_id, session_id, context_label, active_tool,
                    error_type, guidance_priority, prompt_used,
-                   response_given, user_action_after, outcome,
+                   response_given, context_retrieved, user_action_after, outcome,
                    confidence, time_to_action_ms, source, created_at
             FROM training_examples
             ORDER BY created_at DESC
@@ -375,12 +421,17 @@ async def update_training_example(
     guidance_priority: str | None = None,
     prompt_used: str | None = None,
     response_given: str | None = None,
+    context_retrieved: list[dict[str, Any]] | None = None,
     user_action_after: str | None = None,
     outcome: str | None = None,
     confidence: float | None = None,
     time_to_action_ms: int | None = None,
     source: str | None = None,
 ) -> dict[str, Any] | None:
+    context_retrieved_json = None
+    if context_retrieved is not None:
+        context_retrieved_json = json.dumps(context_retrieved)
+
     async with pool.acquire() as connection:
         record = await connection.fetchrow(
             """
@@ -392,15 +443,16 @@ async def update_training_example(
                 guidance_priority = COALESCE($6, guidance_priority),
                 prompt_used = COALESCE($7, prompt_used),
                 response_given = COALESCE($8, response_given),
-                user_action_after = COALESCE($9, user_action_after),
-                outcome = COALESCE($10, outcome),
-                confidence = COALESCE($11, confidence),
-                time_to_action_ms = COALESCE($12, time_to_action_ms),
-                source = COALESCE($13, source)
+                    context_retrieved = COALESCE($9::jsonb, context_retrieved),
+                    user_action_after = COALESCE($10, user_action_after),
+                    outcome = COALESCE($11, outcome),
+                    confidence = COALESCE($12, confidence),
+                    time_to_action_ms = COALESCE($13, time_to_action_ms),
+                    source = COALESCE($14, source)
             WHERE doc_id = $1
             RETURNING doc_id, session_id, context_label, active_tool,
                       error_type, guidance_priority, prompt_used,
-                      response_given, user_action_after, outcome,
+                        response_given, context_retrieved, user_action_after, outcome,
                       confidence, time_to_action_ms, source, created_at;
             """,
             doc_id,
@@ -411,6 +463,7 @@ async def update_training_example(
             guidance_priority,
             prompt_used,
             response_given,
+              context_retrieved_json,
             user_action_after,
             outcome,
             confidence,

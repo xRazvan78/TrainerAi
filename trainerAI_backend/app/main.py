@@ -3,7 +3,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app.db.postgres import shutdown_database, startup_database
+from app.routers.command import router as command_router
 from app.routers.db_crud import router as db_router
+from app.routers.perception import router as perception_router
 
 
 @asynccontextmanager
@@ -21,6 +23,8 @@ def create_app() -> FastAPI:
         return {"status": "ok"}
 
     app.include_router(db_router)
+    app.include_router(command_router)
+    app.include_router(perception_router)
     return app
 
 

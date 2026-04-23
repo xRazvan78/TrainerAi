@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     postgres_db: str = Field(default="", validation_alias="POSTGRES_DB")
 
     model_config = SettingsConfigDict(
-        env_file=(".env", ".env.example"),
+        env_file=(".env"),
         env_file_encoding="utf-8",
         env_prefix="",
         extra="ignore",

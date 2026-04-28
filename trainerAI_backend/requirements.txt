@@ -4,3 +4,5 @@ sqlalchemy[asyncio]>=2.0.30
 asyncpg>=0.30.0
 pydantic-settings>=2.4.0
 python-dotenv>=1.0.1
+sentence-transformers>=3.0.0
+torch>=2.3.0

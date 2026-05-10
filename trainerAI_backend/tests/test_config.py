@@ -18,7 +18,7 @@ def _clear_env(monkeypatch) -> None:
 
 def test_settings_port_defaults_5432(monkeypatch) -> None:
     _clear_env(monkeypatch)
-    settings = Settings()
+    settings = Settings(_env_file=None)
 
     assert settings.postgres_port == 5432
 
@@ -35,7 +35,7 @@ def test_settings_database_url_prefers_explicit_value(monkeypatch) -> None:
     explicit_url = "postgresql+asyncpg://explicit_user:explicit_pass@explicit_host:5432/explicit_db"
     monkeypatch.setenv("DATABASE_URL", explicit_url)
 
-    settings = Settings()
+    settings = Settings(_env_file=None)
 
     assert settings.resolved_database_url() == explicit_url
 
@@ -49,7 +49,7 @@ def test_settings_derives_database_url_from_parts(monkeypatch) -> None:
     monkeypatch.setenv("POSTGRES_PASSWORD", "db_password")
     monkeypatch.setenv("POSTGRES_DB", "db_name")
 
-    settings = Settings()
+    settings = Settings(_env_file=None)
     expected = "postgresql+asyncpg://db_user:db_password@db_host:5432/db_name"
 
     assert settings.database_url == expected

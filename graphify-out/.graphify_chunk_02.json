@@ -1,0 +1,1398 @@
+{
+  "nodes": [
+    {
+      "id": "specs_readme",
+      "label": "TrainerAI Implementation Roadmap",
+      "file_type": "document",
+      "source_file": "specs/README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_d_video_pipeline_spec",
+      "label": "Phase D Video Training Pipeline Spec",
+      "file_type": "document",
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_e_screen_capture_spec",
+      "label": "Phase E Screen Capture Spec",
+      "file_type": "document",
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_f_full_pipeline_spec",
+      "label": "Phase F Full Pipeline Connection Spec",
+      "file_type": "document",
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_g_autocad_detection_spec",
+      "label": "Phase G AutoCAD Detection Spec",
+      "file_type": "document",
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_a_setup",
+      "label": "Phase A Setup",
+      "file_type": "document",
+      "source_file": "specs/phase-A/SETUP.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_b_impl_plan",
+      "label": "Phase B Implementation Plan",
+      "file_type": "document",
+      "source_file": "specs/phase-B/implementation-plan.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_d_readme",
+      "label": "Phase D Execution README",
+      "file_type": "document",
+      "source_file": "specs/phase-D/README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_d1_schema_migration",
+      "label": "D.1 Schema Migration",
+      "file_type": "document",
+      "source_file": "specs/phase-D/01-schema-migration.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_d2_env_setup",
+      "label": "D.2 Environment Setup",
+      "file_type": "document",
+      "source_file": "specs/phase-D/02-environment-setup.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_d3_training_module",
+      "label": "D.3 Training Module",
+      "file_type": "document",
+      "source_file": "specs/phase-D/03-training-module.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_d4_corpus_sourcing",
+      "label": "D.4 Video Corpus Sourcing",
+      "file_type": "document",
+      "source_file": "specs/phase-D/04-video-corpus-sourcing.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_d5_rag_eval",
+      "label": "D.5 RAG Evaluation Harness",
+      "file_type": "document",
+      "source_file": "specs/phase-D/05-rag-evaluation-harness.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase_d6_verification",
+      "label": "D.6 Verification and Acceptance",
+      "file_type": "document",
+      "source_file": "specs/phase-D/06-verification-acceptance.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_txt",
+      "label": "Backend requirements.txt",
+      "file_type": "document",
+      "source_file": "trainerAI_backend/requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "overlay_readme",
+      "label": "Tauri+Dioxus Overlay README",
+      "file_type": "document",
+      "source_file": "trainerAI_overlay/README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "video_extractor_py",
+      "label": "video_extractor.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/training/video_extractor.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "transcriber_py",
+      "label": "transcriber.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/training/transcriber.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "chunker_py",
+      "label": "chunker.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/training/chunker.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ingest_py",
+      "label": "ingest.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/training/ingest.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "eval_rag_py",
+      "label": "scripts/eval_rag.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/scripts/eval_rag.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "capture_rs",
+      "label": "capture.rs",
+      "file_type": "code",
+      "source_file": "trainerAI_overlay/src-tauri/src/capture.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "commands_rs",
+      "label": "commands.rs",
+      "file_type": "code",
+      "source_file": "trainerAI_overlay/src-tauri/src/commands.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ws_client_rs",
+      "label": "ws_client.rs",
+      "file_type": "code",
+      "source_file": "trainerAI_overlay/src-tauri/src/ws_client.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "dioxus_main_rs",
+      "label": "src/main.rs Dioxus",
+      "file_type": "code",
+      "source_file": "trainerAI_overlay/src/main.rs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "perception_service_py",
+      "label": "perception_service.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/services/perception_service.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "embedder_service_py",
+      "label": "embedder_service.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/services/embedder_service.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rag_service_py",
+      "label": "rag_service.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/services/rag_service.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "crud_py",
+      "label": "crud.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/db/crud.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_py",
+      "label": "schema.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/db/schema.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "postgres_py",
+      "label": "postgres.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/db/postgres.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "session_state_service_py",
+      "label": "session_state_service.py",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/services/session_state_service.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "perception_router_py",
+      "label": "perception.py Router",
+      "file_type": "code",
+      "source_file": "trainerAI_backend/app/routers/perception.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "wgc_api",
+      "label": "Windows Graphics Capture API",
+      "file_type": "rationale",
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ahash_frame_diff",
+      "label": "Average Hash Frame Diffing",
+      "file_type": "rationale",
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "whisper_model",
+      "label": "OpenAI Whisper Local STT",
+      "file_type": "rationale",
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "yolov8_detection",
+      "label": "YOLOv8 AutoCAD Detection",
+      "file_type": "rationale",
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "easyocr_text",
+      "label": "EasyOCR Text Extraction",
+      "file_type": "rationale",
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "sentence_transformers_model",
+      "label": "all-MiniLM-L6-v2 Sentence Transformers",
+      "file_type": "rationale",
+      "source_file": "specs/phase-B/implementation-plan.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pgvector_embeddings",
+      "label": "pgvector 384-dim Embeddings",
+      "file_type": "rationale",
+      "source_file": "specs/phase-D/01-schema-migration.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rag_cosine_similarity",
+      "label": "RAG Cosine Similarity",
+      "file_type": "rationale",
+      "source_file": "specs/phase-D/05-rag-evaluation-harness.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "websocket_streaming",
+      "label": "WebSocket Token Streaming",
+      "file_type": "rationale",
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "qwen_llm",
+      "label": "Qwen 3.5 MoE LLM",
+      "file_type": "rationale",
+      "source_file": "specs/README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "srt_shortcircuit",
+      "label": "SRT Short-Circuit for Whisper",
+      "file_type": "rationale",
+      "source_file": "specs/phase-D/03-training-module.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "chunk_overlap_strategy",
+      "label": "Chunk Overlap Strategy",
+      "file_type": "rationale",
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "upsert_doc_id",
+      "label": "Deterministic doc_id Upsert",
+      "file_type": "rationale",
+      "source_file": "specs/phase-D/03-training-module.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "label_studio",
+      "label": "Label Studio Annotation Tool",
+      "file_type": "rationale",
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ytdlp_tool",
+      "label": "yt-dlp Video Downloader",
+      "file_type": "rationale",
+      "source_file": "specs/phase-D/04-video-corpus-sourcing.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ffmpeg_tool",
+      "label": "FFmpeg Audio Extraction",
+      "file_type": "rationale",
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "command_line_heuristic",
+      "label": "AutoCAD Command Line Heuristic",
+      "file_type": "rationale",
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tauri_event_bridge",
+      "label": "Tauri JS Event Bridge",
+      "file_type": "rationale",
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "embed_texts_batch",
+      "label": "embed_texts Batch Helper",
+      "file_type": "rationale",
+      "source_file": "specs/phase-D/01-schema-migration.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "specs_readme",
+      "target": "phase_d_video_pipeline_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "specs_readme",
+      "target": "phase_e_screen_capture_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "specs_readme",
+      "target": "phase_f_full_pipeline_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "specs_readme",
+      "target": "phase_g_autocad_detection_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "specs_readme",
+      "target": "phase_a_setup",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "specs_readme",
+      "target": "phase_b_impl_plan",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "specs_readme",
+      "target": "qwen_llm",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d_readme",
+      "target": "phase_d1_schema_migration",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d_readme",
+      "target": "phase_d2_env_setup",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d_readme",
+      "target": "phase_d3_training_module",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d_readme",
+      "target": "phase_d4_corpus_sourcing",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d_readme",
+      "target": "phase_d5_rag_eval",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d_readme",
+      "target": "phase_d6_verification",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d3_training_module",
+      "target": "video_extractor_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/03-training-module.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d3_training_module",
+      "target": "transcriber_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/03-training-module.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d3_training_module",
+      "target": "chunker_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/03-training-module.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d3_training_module",
+      "target": "ingest_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/03-training-module.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d3_training_module",
+      "target": "srt_shortcircuit",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/03-training-module.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d1_schema_migration",
+      "target": "crud_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/01-schema-migration.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d1_schema_migration",
+      "target": "schema_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/01-schema-migration.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d1_schema_migration",
+      "target": "embedder_service_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/01-schema-migration.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d2_env_setup",
+      "target": "ffmpeg_tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/02-environment-setup.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d2_env_setup",
+      "target": "whisper_model",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/02-environment-setup.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d2_env_setup",
+      "target": "ytdlp_tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/02-environment-setup.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d5_rag_eval",
+      "target": "eval_rag_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/05-rag-evaluation-harness.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d5_rag_eval",
+      "target": "rag_service_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/05-rag-evaluation-harness.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d6_verification",
+      "target": "phase_d1_schema_migration",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/06-verification-acceptance.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d6_verification",
+      "target": "phase_d2_env_setup",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/06-verification-acceptance.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d6_verification",
+      "target": "phase_d3_training_module",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/06-verification-acceptance.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d6_verification",
+      "target": "phase_d4_corpus_sourcing",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/06-verification-acceptance.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_d6_verification",
+      "target": "phase_d5_rag_eval",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/06-verification-acceptance.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_e_screen_capture_spec",
+      "target": "capture_rs",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_e_screen_capture_spec",
+      "target": "commands_rs",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_e_screen_capture_spec",
+      "target": "wgc_api",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_e_screen_capture_spec",
+      "target": "ahash_frame_diff",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "capture_rs",
+      "target": "wgc_api",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "capture_rs",
+      "target": "ahash_frame_diff",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "commands_rs",
+      "target": "capture_rs",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_f_full_pipeline_spec",
+      "target": "ws_client_rs",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_f_full_pipeline_spec",
+      "target": "dioxus_main_rs",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_f_full_pipeline_spec",
+      "target": "commands_rs",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_f_full_pipeline_spec",
+      "target": "websocket_streaming",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_f_full_pipeline_spec",
+      "target": "tauri_event_bridge",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_f_full_pipeline_spec",
+      "target": "phase_e_screen_capture_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "ws_client_rs",
+      "target": "websocket_streaming",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "dioxus_main_rs",
+      "target": "tauri_event_bridge",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "ws_client_rs",
+      "target": "dioxus_main_rs",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-F-full-pipeline-connection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_g_autocad_detection_spec",
+      "target": "perception_service_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_g_autocad_detection_spec",
+      "target": "yolov8_detection",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_g_autocad_detection_spec",
+      "target": "easyocr_text",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_g_autocad_detection_spec",
+      "target": "label_studio",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_g_autocad_detection_spec",
+      "target": "phase_f_full_pipeline_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "perception_service_py",
+      "target": "yolov8_detection",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "perception_service_py",
+      "target": "easyocr_text",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "perception_router_py",
+      "target": "perception_service_py",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_b_impl_plan",
+      "target": "embedder_service_py",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-B/implementation-plan.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_b_impl_plan",
+      "target": "sentence_transformers_model",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-B/implementation-plan.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "embedder_service_py",
+      "target": "sentence_transformers_model",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-B/implementation-plan.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "ingest_py",
+      "target": "video_extractor_py",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "ingest_py",
+      "target": "transcriber_py",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "ingest_py",
+      "target": "chunker_py",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "ingest_py",
+      "target": "embedder_service_py",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "ingest_py",
+      "target": "crud_py",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "ingest_py",
+      "target": "postgres_py",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "video_extractor_py",
+      "target": "ffmpeg_tool",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "transcriber_py",
+      "target": "whisper_model",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "eval_rag_py",
+      "target": "embedder_service_py",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/05-rag-evaluation-harness.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "eval_rag_py",
+      "target": "crud_py",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/05-rag-evaluation-harness.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "eval_rag_py",
+      "target": "postgres_py",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D/05-rag-evaluation-harness.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "rag_service_py",
+      "target": "rag_cosine_similarity",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "specs/phase-D/05-rag-evaluation-harness.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "phase_a_setup",
+      "target": "qwen_llm",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-A/SETUP.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "requirements_txt",
+      "target": "sentence_transformers_model",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "trainerAI_backend/requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "commands_rs",
+      "target": "perception_router_py",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-E-screen-capture.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "yolov8_detection",
+      "target": "easyocr_text",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "specs/phase-G-autocad-detection.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "whisper_model",
+      "target": "srt_shortcircuit",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "specs/phase-D/03-training-module.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sentence_transformers_model",
+      "target": "pgvector_embeddings",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "specs/phase-B/implementation-plan.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "chunk_overlap_strategy",
+      "target": "rag_cosine_similarity",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "specs/phase-D-video-training-pipeline.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "video_ingest_pipeline",
+      "label": "Video-to-Embedding Ingest Pipeline",
+      "nodes": [
+        "video_extractor_py",
+        "transcriber_py",
+        "chunker_py",
+        "ingest_py",
+        "embedder_service_py",
+        "crud_py"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "specs/phase-D-video-training-pipeline.md"
+    },
+    {
+      "id": "perception_detection_pipeline",
+      "label": "AutoCAD Perception Detection Pipeline",
+      "nodes": [
+        "capture_rs",
+        "perception_service_py",
+        "yolov8_detection",
+        "easyocr_text",
+        "session_state_service_py"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "specs/phase-G-autocad-detection.md"
+    },
+    {
+      "id": "end_to_end_guidance_flow",
+      "label": "End-to-End Guidance Flow",
+      "nodes": [
+        "commands_rs",
+        "ws_client_rs",
+        "dioxus_main_rs",
+        "websocket_streaming",
+        "rag_service_py"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "specs/phase-F-full-pipeline-connection.md"
+    }
+  ],
+  "input_tokens": 78560,
+  "output_tokens": 0
+}

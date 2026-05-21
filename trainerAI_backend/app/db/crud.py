@@ -170,20 +170,29 @@ async def create_embedding(
     source: str,
     content: str,
     embedding: Sequence[float],
+    metadata: dict[str, Any] | None = None,
 ) -> dict[str, Any] | None:
     vector_literal = to_vector_literal(embedding)
+    metadata_json = json.dumps(metadata or {})
 
     async with pool.acquire() as connection:
         record = await connection.fetchrow(
             """
-            INSERT INTO embeddings (doc_id, source, content, embedding)
-            VALUES ($1, $2, $3, $4::vector)
-            RETURNING doc_id, source, content, embedding::text AS embedding_text, created_at;
+            INSERT INTO embeddings (doc_id, source, content, embedding, metadata)
+            VALUES ($1, $2, $3, $4::vector, $5::jsonb)
+            ON CONFLICT (doc_id) DO UPDATE
+              SET source = EXCLUDED.source,
+                  content = EXCLUDED.content,
+                  embedding = EXCLUDED.embedding,
+                  metadata = EXCLUDED.metadata
+            RETURNING doc_id, source, content, embedding::text AS embedding_text,
+                      metadata, created_at;
             """,
             doc_id,
             source,
             content,
             vector_literal,
+            metadata_json,
         )
     return _embedding_record_to_dict(record)
 
@@ -192,7 +201,7 @@ async def get_embedding(pool: asyncpg.Pool, doc_id: str) -> dict[str, Any] | Non
     async with pool.acquire() as connection:
         record = await connection.fetchrow(
             """
-            SELECT doc_id, source, content, embedding::text AS embedding_text, created_at
+            SELECT doc_id, source, content, embedding::text AS embedding_text, metadata, created_at
             FROM embeddings
             WHERE doc_id = $1;
             """,
@@ -205,7 +214,7 @@ async def list_embeddings(pool: asyncpg.Pool, limit: int = 50, offset: int = 0) 
     async with pool.acquire() as connection:
         rows = await connection.fetch(
             """
-            SELECT doc_id, source, content, embedding::text AS embedding_text, created_at
+            SELECT doc_id, source, content, embedding::text AS embedding_text, metadata, created_at
             FROM embeddings
             ORDER BY created_at DESC
             LIMIT $1 OFFSET $2;
@@ -234,7 +243,7 @@ async def update_embedding(
                 content = COALESCE($3, content),
                 embedding = COALESCE($4::vector, embedding)
             WHERE doc_id = $1
-            RETURNING doc_id, source, content, embedding::text AS embedding_text, created_at;
+            RETURNING doc_id, source, content, embedding::text AS embedding_text, metadata, created_at;
             """,
             doc_id,
             source,
@@ -261,7 +270,7 @@ async def query_similar_embeddings(
     async with pool.acquire() as connection:
         rows = await connection.fetch(
             """
-            SELECT doc_id, source, content,
+            SELECT doc_id, source, content, metadata,
                    1 - (embedding <=> $1::vector) AS similarity_score
             FROM embeddings
             WHERE 1 - (embedding <=> $1::vector) >= $2

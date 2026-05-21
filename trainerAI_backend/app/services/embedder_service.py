@@ -31,3 +31,21 @@ def embed_text(text: str) -> List[float]:
         f"Embedding dimension mismatch: expected {_EXPECTED_DIM}, got {len(vector)}"
     )
     return vector.tolist()
+
+
+def embed_texts(texts: List[str], batch_size: int = 32) -> List[List[float]]:
+    """Embed many strings in one model call (~10x faster than calling embed_text in a loop)."""
+    if not texts:
+        return []
+    model = _get_model()
+    vectors = model.encode(
+        texts,
+        normalize_embeddings=True,
+        batch_size=batch_size,
+        show_progress_bar=False,
+        convert_to_numpy=True,
+    )
+    assert vectors.shape[1] == _EXPECTED_DIM, (
+        f"Embedding dimension mismatch: expected {_EXPECTED_DIM}, got {vectors.shape[1]}"
+    )
+    return vectors.tolist()

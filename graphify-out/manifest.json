@@ -1,4 +1,8 @@
 {
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\conftest.py": {
+    "mtime": 1778438383.325989,
+    "hash": "4670374e9c53cc0749c70526055e17ed"
+  },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\config.py": {
     "mtime": 1776942075.3019361,
     "hash": "0882f1a70c9ceb140f322c5da2086077"
@@ -12,16 +16,16 @@
     "hash": "15a46a2edbfa7a642754e7f2ffa7c68d"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\db\\crud.py": {
-    "mtime": 1776941763.798094,
-    "hash": "2bd9b34be9b51829ac678f09248e3a98"
+    "mtime": 1778438220.2901313,
+    "hash": "0fe13bc00a3f5e7b9d4711e0a8bc7056"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\db\\postgres.py": {
     "mtime": 1776941763.798094,
     "hash": "c7451b60f2271e6e9bbd5be3c10a7221"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\db\\schema.py": {
-    "mtime": 1776941763.7990913,
-    "hash": "1bdadc1788597e7799407a02bdb3beac"
+    "mtime": 1778438201.295279,
+    "hash": "1e555048c18b3bf58053e8a3342eeb6a"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\db\\__init__.py": {
     "mtime": 1776941763.7970977,
@@ -64,8 +68,8 @@
     "hash": "f65f4d1e194d0a0b8d4e006bab8ab60a"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\services\\embedder_service.py": {
-    "mtime": 1777389022.1779397,
-    "hash": "c305edac0155a5e25e055aaea90bc752"
+    "mtime": 1778438227.6385846,
+    "hash": "8afba5377257f7070da9b6f9a644d487"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\services\\feedback_logger_service.py": {
     "mtime": 1776941763.807071,
@@ -83,6 +87,34 @@
     "mtime": 1776941763.8040783,
     "hash": "80747bd1bf4133b1893099510b3d5bc3"
   },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\training\\chunker.py": {
+    "mtime": 1778439111.3138301,
+    "hash": "b05045bd3b0ae55456076bb32d3bff62"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\training\\ingest.py": {
+    "mtime": 1778830171.6009302,
+    "hash": "fbf48226ff692f7b4417bd9adeecb87c"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\training\\transcriber.py": {
+    "mtime": 1778438695.6669652,
+    "hash": "c37e6bbb72d3ee28acc93049f94c8c51"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\training\\video_extractor.py": {
+    "mtime": 1778438684.1643894,
+    "hash": "ca992dc54110a1d2baa6926346167480"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\training\\__init__.py": {
+    "mtime": 1778438677.71248,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\scripts\\eval_rag.py": {
+    "mtime": 1778438636.6994443,
+    "hash": "c5268a9afa725dba788862461e772800"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\tests\\test_chunker.py": {
+    "mtime": 1778438738.0964034,
+    "hash": "b457c8c3eb0900ebd494943bd2deef7e"
+  },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\tests\\test_command_api.py": {
     "mtime": 1776941763.8080697,
     "hash": "d1397131ea7e81d7d985bd47c332aa04"
@@ -92,20 +124,24 @@
     "hash": "4d4a80f69d31458bc2435c8381e9d584"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\tests\\test_config.py": {
-    "mtime": 1777389971.420413,
+    "mtime": 1778438057.5132964,
     "hash": "f2c8e837f50f47c0473dd16c5dcad777"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\tests\\test_db_crud_helpers.py": {
-    "mtime": 1776941763.8090656,
-    "hash": "a98ae2fe80d3605af02e858d11908365"
+    "mtime": 1778439143.4622765,
+    "hash": "d6a7ec3ec0087bfafbe54fde30b08267"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\tests\\test_embedder_service.py": {
-    "mtime": 1777389545.842361,
-    "hash": "96f24b15010ca550dc2486af2b9e1bf7"
+    "mtime": 1778438232.8782442,
+    "hash": "846f63c5182dc9503d74c398a1180450"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\tests\\test_feedback_logger_service.py": {
     "mtime": 1776941763.8090656,
     "hash": "461d7d855ca3805b5db7b237db2fbb32"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\tests\\test_ingest_cli.py": {
+    "mtime": 1778439124.177525,
+    "hash": "49b94f26758a6cecb1705cc73b42c7c8"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\tests\\test_perception_api.py": {
     "mtime": 1776941763.8100624,
@@ -148,8 +184,8 @@
     "hash": "35337a15f3b0b9d63d5c52c04b322ec9"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\CLAUDE.md": {
-    "mtime": 1778435767.5128734,
-    "hash": "f9ea484f438dd267a97d450f437e39c0"
+    "mtime": 1778438057.4802966,
+    "hash": "4d26a2641680047952c4b16b7795bf35"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\docker-compose.yml": {
     "mtime": 1777387790.1222794,
@@ -158,6 +194,10 @@
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\README.md": {
     "mtime": 1775575718.427765,
     "hash": "63c0fc6492d620f938f9c2543be23e95"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\plans\\phase-D-complete.md": {
+    "mtime": 1778836660.5876815,
+    "hash": "40bc14edf3adbd121d6a6dcd64cd4099"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\plans\\postgresql-pgvector-backend-connection-phase-1-complete.md": {
     "mtime": 1776941763.7921104,
@@ -228,52 +268,60 @@
     "hash": "f64f537c64f35fa7c7bb84335f943b1c"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\README.md": {
-    "mtime": 1777015301.8459089,
-    "hash": "59cefe50528ddd8926f439aaff09a128"
+    "mtime": 1778836667.0730128,
+    "hash": "47a125e02536d4be33ffe14c01fec723"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-A\\SETUP.md": {
     "mtime": 1777387790.1353405,
     "hash": "f66b9f8ce87cc98c902d821a8aeb93a6"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-B\\implementation-plan.md": {
-    "mtime": 1777388572.3657656,
-    "hash": "6a6f99cc636196d2bd022a737fa1413b"
+    "mtime": 1778438057.5042987,
+    "hash": "1d8a45f7a8594e2dc396d7dd069da023"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-D\\01-schema-migration.md": {
-    "mtime": 1778435085.9471748,
-    "hash": "a5365df7460b8be3cdf3352dbd0354af"
+    "mtime": 1778438057.5052989,
+    "hash": "99e47207782b11e6297dc8cfbb244532"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-D\\02-environment-setup.md": {
-    "mtime": 1778435105.39569,
-    "hash": "c80a8755c1a75ee276617d7386e3b44a"
+    "mtime": 1778438057.5052989,
+    "hash": "82c49c218c1ca0e76a5c8ec0f6198f21"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-D\\03-training-module.md": {
-    "mtime": 1778435145.5949152,
-    "hash": "f27273a364a03599b1582efb83923e3e"
+    "mtime": 1778438057.5052989,
+    "hash": "0c38f1f2e830ac7b8aaa5ba3c45a7725"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-D\\04-video-corpus-sourcing.md": {
-    "mtime": 1778435184.8550334,
-    "hash": "d79ffa3262e5f14e0868ae1f6e4e7cad"
+    "mtime": 1778438057.5063014,
+    "hash": "77dfbaf097df864712f466b47c5f5dfd"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-D\\05-rag-evaluation-harness.md": {
-    "mtime": 1778435229.024965,
-    "hash": "2da4cf9fe4d83dfe7efbd63c381c215f"
+    "mtime": 1778438057.5063014,
+    "hash": "18da989ed6e45be15840791786dec67b"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-D\\06-verification-acceptance.md": {
-    "mtime": 1778435260.81978,
-    "hash": "7ca8c87d77872b9eb29a1328b8a12604"
+    "mtime": 1778438057.507298,
+    "hash": "3bcef014c0c4e8c22818559e3e97ba84"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-D\\code-review-findings.md": {
+    "mtime": 1778439216.3899899,
+    "hash": "395ef2bcdb56eb055a1edd48792de2e3"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-D\\README.md": {
-    "mtime": 1778435052.5218465,
-    "hash": "d95af144f32b9e42596b32d0cbaddd0a"
+    "mtime": 1778438057.507298,
+    "hash": "656a6a8e68a6d6ab2c39617e8efbc781"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\requirements.txt": {
-    "mtime": 1777389022.1779397,
-    "hash": "3d001008d786d30efa4204b608d21889"
+    "mtime": 1778438197.0878346,
+    "hash": "1d0c85356cf22ff1bd643a5f42709d10"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_overlay\\README.md": {
     "mtime": 1775572868.6053708,
     "hash": "57f21477f7cc30aa72292d179a9af78b"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\urls.txt": {
+    "mtime": 1778832657.527909,
+    "hash": "2600a10349360d3d10444960243fd382"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_overlay\\assets\\dioxus.png": {
     "mtime": 1775572868.6053708,
@@ -338,5 +386,89 @@
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_overlay\\src-tauri\\icons\\StoreLogo.png": {
     "mtime": 1775572868.6283083,
     "hash": "02859e2326344ae7c9559f1af0abba34"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\AIA_Interiors - AutoCAD_Hatch_Command_Tutorial_AutoCAD_Hatch_Beginners [xKn0G2041mA].mkv": {
+    "mtime": 1778829081.940385,
+    "hash": "ade1540ea642664b4fbed566868649c9"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\AutoCAD_Drafting_Tips - How_to_Draw_Lines_in_AutoCAD_2024_AutoCAD_Line_Command_Tutorial_Complete_autocad [qgvWp6eV8fU].mkv": {
+    "mtime": 1778829060.2513292,
+    "hash": "47a483790c6b815046e49a1d02fa144d"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CAD - How_to_chamfer_in_autocad_AutoCAD_2024_-_Chamfer_Command [gRWw9e4FUic].mkv": {
+    "mtime": 1778835498.9542053,
+    "hash": "8ba06a4b70a3981a4ba48b166aed099c"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADREGION_Tutorials - Chamfer_and_Fillet_corners_-_AutoCAD_2024_Tutorials [L2cyzblCvXE].mkv": {
+    "mtime": 1778831694.8235068,
+    "hash": "9b9ad915d0ed51cc8e457895d07d8271"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADREGION_Tutorials - Draw_Circles_-_AutoCAD_Tutorials_2024 [mMSZOChpfCc].mkv": {
+    "mtime": 1778835484.3645444,
+    "hash": "8dab8c88ea2c53b431150d0de05c5740"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADREGION_Tutorials - Extend_objects_in_AutoCAD_-_AutoCAD_2024_Tutorials [oY3rxN2AHhg].mkv": {
+    "mtime": 1778835490.564229,
+    "hash": "e199db51846959079b4d799a0d321ea1"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADREGION_Tutorials - Insert_Blocks_in_AutoCAD_-_AutoCAD_2024_Tutorials [F7VndHPUjB4].mkv": {
+    "mtime": 1778829091.1347628,
+    "hash": "4195e83aa2db00f44a59ab5cd0ba006e"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADREGION_Tutorials - Insert_dimensions_-_AutoCAD_2024_Tutorials [Jogkb-PoOwk].mkv": {
+    "mtime": 1778829095.9143937,
+    "hash": "0bd62c453ab515805e22b20f9411b8a6"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADREGION_Tutorials - Mirror_objects_-_AutoCAD_2024 [1YzJLqHU_hY].mkv": {
+    "mtime": 1778831691.4293358,
+    "hash": "083f06be514f7ee95e7d33d3fbf148c0"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADREGION_Tutorials - Rotate_objects_-_AutoCAD_2024 [55PYfpiP0hQ].mkv": {
+    "mtime": 1778835501.838786,
+    "hash": "a4e29775b45edc0a16e9710fc2f7d838"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADREGION_Tutorials - Scale_objects_-_AutoCAD_2024_Tutorials [jn18glkia98].mkv": {
+    "mtime": 1778835505.198734,
+    "hash": "99cd05643dda9f29d11a01a1a5fabb22"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADREGION_Tutorials - Trim_objects_in_AutoCAD_-_AutoCAD_2024_Tutorials [2OcZhZwWuXM].mkv": {
+    "mtime": 1778831687.7901168,
+    "hash": "de9ea7da5c22ee59e9493efd01b6e714"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADREGION_Tutorials - Working_with_Layers_-_AutoCAD_2024_Tutorials [O_TbQnS0B4g].mkv": {
+    "mtime": 1778829086.6402564,
+    "hash": "068649e9c14539326109e82136297632"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CADSource - AutoCAD_Tutorial_-_Rectangle_and_Polygon_Commands_Explained [ycL9N4M9rCc].mkv": {
+    "mtime": 1778831681.5509758,
+    "hash": "ce16d1ce3293c864b93737c2583aee7d"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CAD_CAM_Tutorials - How_to_Dimension_in_AutoCAD_Linear_Aligned_Angular_Radius_Ordinate_Jogged_Tolerance [woJtzlCA9Ok].mkv": {
+    "mtime": 1778835521.0768864,
+    "hash": "d2e687eee14e0b9e73b5e3a15db09e1b"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CAD_Video_Tutorials - AutoCAD_Tutorial_-_Create_Blocks_or_Symbols [zlgwUBokcKI].mkv": {
+    "mtime": 1778835515.7637172,
+    "hash": "8b8665bfbc28626cc71fe3238a055337"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\CIVIL_MANIA - Autocad_2025_Introduction_-_Application_menu_Quick_Access_Toolbar_Ribbon_Workspace_Command_Line [Fcgj0fYI8LM].mkv": {
+    "mtime": 1778829055.4923992,
+    "hash": "c04b540cde9c3b687390354b294b7fea"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\Just_Ask_Jake - AutoCAD_-_How_to_Hide_a_Layer_Quick_Easy_Tutorial [OTZE5OEYcRI].mkv": {
+    "mtime": 1778835511.1405873,
+    "hash": "114869e3cad02c5beae4c4b1f6fcc88a"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\Just_Ask_Jake - AutoCAD_-_How_to_Use_the_OFFSET_Command_Draft_Faster_with_Parallel_Lines [TdQQbaf9b4Y].mkv": {
+    "mtime": 1778835493.9142375,
+    "hash": "73e4e32182d64b1630aa010b4e9801b8"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\MD_Design_Academy - 07_AutoCAD_Tutorial-_Circle_and_Arc_Command [FvX_RzkoO3k].mkv": {
+    "mtime": 1778829066.1802924,
+    "hash": "762f8bd584bfbab3bcea7b4a18aedcce"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\training_videos\\Practical_AutoCAD_and_Inventor - AutoCAD_-_Offset_Command_and_Options [sKbjdDzr6i0].mkv": {
+    "mtime": 1778829073.914427,
+    "hash": "4da301b25cf8bf4719c092ef28eefbc3"
   }
 }

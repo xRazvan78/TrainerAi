@@ -1,0 +1,206 @@
+[
+  {
+    "query": "how do I draw a straight line",
+    "expected_tool": "LINE",
+    "expected_video_substr": "line",
+    "top1": {
+      "doc_id": "AutoCAD_Drafting_Tips - How_to_Draw_Lines_in_AutoCAD_2024_AutoCAD_Line_Command_Tutorial_Complete_autocad [qgvWp6eV8fU]-0006",
+      "similarity": 0.5282981395721436,
+      "source_video": "autocad_drafting_tips - how_to_draw_lines_in_autocad_2024_autocad_line_command_tutorial_complete_autocad [qgvwp6ev8fu]",
+      "active_tool_hint": "LINE",
+      "snippet": "Drew and select the lines I previously Drew and select the lines I previously Drew and press delete from my keyboard to delete press delete "
+    },
+    "tool_match": true,
+    "video_match": true
+  },
+  {
+    "query": "how do I round corners between two lines",
+    "expected_tool": "FILLET",
+    "expected_video_substr": "fillet",
+    "top1": {
+      "doc_id": "CADREGION_Tutorials - Chamfer_and_Fillet_corners_-_AutoCAD_2024_Tutorials [L2cyzblCvXE]-0001",
+      "similarity": 0.503796577001026,
+      "source_video": "cadregion_tutorials - chamfer_and_fillet_corners_-_autocad_2024_tutorials [l2cyzblcvxe]",
+      "active_tool_hint": "CIRCLE",
+      "snippet": "rest of the lines of the corners I want to become rounded. Once I no longer need the fillet tool, I will press either Enter or Esc to deacti"
+    },
+    "tool_match": false,
+    "video_match": true
+  },
+  {
+    "query": "cutting off lines that extend past an intersection",
+    "expected_tool": "TRIM",
+    "expected_video_substr": "trim",
+    "top1": {
+      "doc_id": "CADREGION_Tutorials - Trim_objects_in_AutoCAD_-_AutoCAD_2024_Tutorials [2OcZhZwWuXM]-0002",
+      "similarity": 0.6007941603187238,
+      "source_video": "cadregion_tutorials - trim_objects_in_autocad_-_autocad_2024_tutorials [2oczhzwwuxm]",
+      "active_tool_hint": "TRIM",
+      "snippet": "part of this line as if the horizontal line actually intersected with it. I will trim the upper side, by clicking on it and then I will deac"
+    },
+    "tool_match": true,
+    "video_match": true
+  },
+  {
+    "query": "make a parallel copy of a line at a fixed distance",
+    "expected_tool": "OFFSET",
+    "expected_video_substr": "offset",
+    "top1": {
+      "doc_id": "CAD - How_to_chamfer_in_autocad_AutoCAD_2024_-_Chamfer_Command [gRWw9e4FUic]-0002",
+      "similarity": 0.41658268373218976,
+      "source_video": "cad - how_to_chamfer_in_autocad_autocad_2024_-_chamfer_command [grww9e4fuic]",
+      "active_tool_hint": "LINE",
+      "snippet": "this line first it should now I select this line first it should now I select this line first it should be 40 and this line should be 60. yo"
+    },
+    "tool_match": false,
+    "video_match": false
+  },
+  {
+    "query": "how do I draw a circle by specifying a centre and radius",
+    "expected_tool": "CIRCLE",
+    "expected_video_substr": "circle",
+    "top1": {
+      "doc_id": "CADREGION_Tutorials - Draw_Circles_-_AutoCAD_Tutorials_2024 [mMSZOChpfCc]-0000",
+      "similarity": 0.5764453582896402,
+      "source_video": "cadregion_tutorials - draw_circles_-_autocad_tutorials_2024 [mmszochpfcc]",
+      "active_tool_hint": "CIRCLE",
+      "snippet": "In this lesson, we are going to learn how we can create circles, depending on the data we have available. For the following exercise a drawi"
+    },
+    "tool_match": true,
+    "video_match": true
+  },
+  {
+    "query": "how do I create reusable symbols I can insert multiple times",
+    "expected_tool": "BLOCK",
+    "expected_video_substr": "block",
+    "top1": null,
+    "tool_match": false,
+    "video_match": false
+  },
+  {
+    "query": "how do I fill an area with a hatch pattern",
+    "expected_tool": "HATCH",
+    "expected_video_substr": "hatch",
+    "top1": {
+      "doc_id": "AIA_Interiors - AutoCAD_Hatch_Command_Tutorial_AutoCAD_Hatch_Beginners [xKn0G2041mA]-0010",
+      "similarity": 0.5722685115177418,
+      "source_video": "aia_interiors - autocad_hatch_command_tutorial_autocad_hatch_beginners [xkn0g2041ma]",
+      "active_tool_hint": "HATCH",
+      "snippet": "to red this is a great introduction to understand how to apply your hatch understand how to apply your hatch understand how to apply your ha"
+    },
+    "tool_match": true,
+    "video_match": true
+  },
+  {
+    "query": "how do I add measurements to my drawing",
+    "expected_tool": "DIMENSION",
+    "expected_video_substr": "dim",
+    "top1": {
+      "doc_id": "CAD_CAM_Tutorials - How_to_Dimension_in_AutoCAD_Linear_Aligned_Angular_Radius_Ordinate_Jogged_Tolerance [woJtzlCA9Ok]-0000",
+      "similarity": 0.6059627767823482,
+      "source_video": "cad_cam_tutorials - how_to_dimension_in_autocad_linear_aligned_angular_radius_ordinate_jogged_tolerance [wojtzlca9ok]",
+      "active_tool_hint": "DIMENSION",
+      "snippet": "in this tutorial we will learn how to in this tutorial we will learn how to place dimensions in AutoCAD drawing place dimensions in AutoCAD "
+    },
+    "tool_match": true,
+    "video_match": true
+  },
+  {
+    "query": "how do I organise objects so I can hide groups of them",
+    "expected_tool": "LAYER",
+    "expected_video_substr": "layer",
+    "top1": {
+      "doc_id": "Just_Ask_Jake - AutoCAD_-_How_to_Hide_a_Layer_Quick_Easy_Tutorial [OTZE5OEYcRI]-0002",
+      "similarity": 0.47203994297267116,
+      "source_video": "just_ask_jake - autocad_-_how_to_hide_a_layer_quick_easy_tutorial [otze5oeycri]",
+      "active_tool_hint": "LAYER",
+      "snippet": "Here you'll see a list of every layer you've you'll see a list of every layer you've you'll see a list of every layer you've created along w"
+    },
+    "tool_match": true,
+    "video_match": true
+  },
+  {
+    "query": "how do I make a mirrored copy of a shape",
+    "expected_tool": "MIRROR",
+    "expected_video_substr": "mirror",
+    "top1": {
+      "doc_id": "CADREGION_Tutorials - Mirror_objects_-_AutoCAD_2024 [1YzJLqHU_hY]-0000",
+      "similarity": 0.6816122505166095,
+      "source_video": "cadregion_tutorials - mirror_objects_-_autocad_2024 [1yzjlqhu_hy]",
+      "active_tool_hint": "LINE",
+      "snippet": "There are objects and shapes that are symmetrical, which means they are made up of exactly the same parts facing each other or rotated aroun"
+    },
+    "tool_match": false,
+    "video_match": true
+  },
+  {
+    "query": "how do I rotate an object around a point",
+    "expected_tool": "ROTATE",
+    "expected_video_substr": "rotate",
+    "top1": {
+      "doc_id": "CADREGION_Tutorials - Rotate_objects_-_AutoCAD_2024 [55PYfpiP0hQ]-0000",
+      "similarity": 0.5404795569324363,
+      "source_video": "cadregion_tutorials - rotate_objects_-_autocad_2024 [55pyfpip0hq]",
+      "active_tool_hint": "ROTATE",
+      "snippet": "Apart from moving objects inside a drawing, it is highly possible that we will also need to rotate those items to fix their orientation. The"
+    },
+    "tool_match": true,
+    "video_match": true
+  },
+  {
+    "query": "how do I extend a line until it touches another line",
+    "expected_tool": "EXTEND",
+    "expected_video_substr": "extend",
+    "top1": {
+      "doc_id": "CADREGION_Tutorials - Extend_objects_in_AutoCAD_-_AutoCAD_2024_Tutorials [oY3rxN2AHhg]-0002",
+      "similarity": 0.5681843676347295,
+      "source_video": "cadregion_tutorials - extend_objects_in_autocad_-_autocad_2024_tutorials [oy3rxn2ahhg]",
+      "active_tool_hint": "LINE",
+      "snippet": "of those lines, the message \u201cPath does not intersect with the boundary edge\u201d appears. So, to extend these lines I have to either create a ve"
+    },
+    "tool_match": false,
+    "video_match": true
+  },
+  {
+    "query": "how do I cut a 45-degree corner between two lines",
+    "expected_tool": "CHAMFER",
+    "expected_video_substr": "chamfer",
+    "top1": {
+      "doc_id": "CADREGION_Tutorials - Trim_objects_in_AutoCAD_-_AutoCAD_2024_Tutorials [2OcZhZwWuXM]-0002",
+      "similarity": 0.4831720302598467,
+      "source_video": "cadregion_tutorials - trim_objects_in_autocad_-_autocad_2024_tutorials [2oczhzwwuxm]",
+      "active_tool_hint": "TRIM",
+      "snippet": "part of this line as if the horizontal line actually intersected with it. I will trim the upper side, by clicking on it and then I will deac"
+    },
+    "tool_match": false,
+    "video_match": false
+  },
+  {
+    "query": "what's the command line at the bottom of AutoCAD for",
+    "expected_tool": "general",
+    "expected_video_substr": "intro",
+    "top1": {
+      "doc_id": "CAD - How_to_chamfer_in_autocad_AutoCAD_2024_-_Chamfer_Command [gRWw9e4FUic]-0004",
+      "similarity": 0.6255249977111816,
+      "source_video": "cad - how_to_chamfer_in_autocad_autocad_2024_-_chamfer_command [grww9e4fuic]",
+      "active_tool_hint": "GENERAL",
+      "snippet": "45 45 so the angle was 45 45 so by by by typing this one e method typing this one e method typing this one e method it will pick it will pic"
+    },
+    "tool_match": true,
+    "video_match": false
+  },
+  {
+    "query": "how do I scale a drawing up or down",
+    "expected_tool": "SCALE",
+    "expected_video_substr": "scale",
+    "top1": {
+      "doc_id": "CADREGION_Tutorials - Scale_objects_-_AutoCAD_2024_Tutorials [jn18glkia98]-0000",
+      "similarity": 0.5415556753608997,
+      "source_video": "cadregion_tutorials - scale_objects_-_autocad_2024_tutorials [jn18glkia98]",
+      "active_tool_hint": "LINE",
+      "snippet": "Changing the size of the objects proportionally is something that we may also need to do a couple of times while working. For example, we ma"
+    },
+    "tool_match": false,
+    "video_match": true
+  }
+]

@@ -1,2 +1,16 @@
 trainerAI_backend/.env
 .env
+
+# Training video corpus — media files are not committed; urls.txt is
+training_videos/*.mp4
+training_videos/*.mkv
+training_videos/*.webm
+training_videos/*.wav
+training_videos/*.srt
+training_videos/*.vtt
+
+# Stray media files if accidentally downloaded outside training_videos/
+*.mp4
+*.mkv
+*.webm
+*.wav

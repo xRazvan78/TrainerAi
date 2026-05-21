@@ -35,10 +35,10 @@ User sees inline tips
 | FastAPI CRUD + routers       | ✅ Complete | Sessions, embeddings, training_examples, perception_states |
 | Command ingestion pipeline   | ✅ Complete | 202 ack, async background task                             |
 | RAG retrieval service        | ✅ Complete | Structurally correct, **mock embedder**                    |
-| Embedder service             | ⚠️ Mock     | SHA-256 hash, not semantic                                 |
+| Embedder service             | ✅ Complete | sentence-transformers all-MiniLM-L6-v2, 384-dim            |
 | Qwen / LLM service           | ❌ Missing  | Hardcoded mock string returned                             |
 | WebSocket streaming          | ❌ Missing  | —                                                          |
-| Video training pipeline      | ❌ Missing  | pgvector tables are empty                                  |
+| Video training pipeline      | ✅ Complete | 17 videos ingested, 73% RAG eval top-1 match               |
 | Tauri screen capture         | ❌ Stub     | WGC not implemented                                        |
 | Tauri → backend connection   | ❌ Stub     | Hardcoded responses                                        |
 | YOLOv8 / EasyOCR on backend  | ❌ Missing  | Perception endpoint accepts JSONB but no inference         |

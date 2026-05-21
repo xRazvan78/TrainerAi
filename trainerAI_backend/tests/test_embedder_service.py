@@ -36,3 +36,16 @@ def test_embed_text_is_deterministic():
     v1 = embed_text("AutoCAD circle command")
     v2 = embed_text("AutoCAD circle command")
     assert v1 == v2
+
+
+def test_embed_texts_returns_correct_count_and_dimension():
+    from app.services.embedder_service import embed_texts
+    vectors = embed_texts(["foo", "bar", "baz"])
+    assert len(vectors) == 3
+    assert all(len(v) == 384 for v in vectors)
+    assert all(isinstance(x, float) for v in vectors for x in v)
+
+
+def test_embed_texts_empty_returns_empty():
+    from app.services.embedder_service import embed_texts
+    assert embed_texts([]) == []

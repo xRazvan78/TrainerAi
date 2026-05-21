@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest tests/test_embedder_service.py tests/test_db_crud_helpers.py -v)",
+      "Bash(python -m pip show pytest)",
+      "Bash(where pytest *)",
+      "Bash(ls venv *)",
+      "Bash(ls .venv)",
+      "Bash(venv/Scripts/pytest tests/test_embedder_service.py tests/test_db_crud_helpers.py -v)",
+      "Bash(.venv\\\\Scripts\\\\python.exe -m pytest tests/test_chunker.py tests/test_ingest_cli.py -v)",
+      "Bash(dir D:\\\\faculta\\\\An_3\\\\Semestru_1\\\\Inteligenta_Artificiala\\\\Proiect\\\\TrainerAi\\\\training_videos *)",
+      "WebSearch",
+      "Bash(docker exec trainerai_postgres *)",
+      "Bash(Get-Service -Name \"postgresql*\")",
+      "Bash(Get-Process -Name \"postgres\" -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Service *)"
+    ]
+  }
+}

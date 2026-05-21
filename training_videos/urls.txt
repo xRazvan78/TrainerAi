@@ -1,0 +1,45 @@
+# AutoCAD Tutorial Video Corpus
+# Format: one YouTube URL per line; blank lines and # comments are ignored.
+# Download with: yt-dlp --batch-file urls.txt --write-auto-subs --write-subs --sub-lang en --convert-subs srt --restrict-filenames --format "bestvideo[height<=720]+bestaudio/best[height<=720]" --output "%(uploader)s - %(title)s [%(id)s].%(ext)s"
+
+# --- General AutoCAD Introduction ---
+# AutoCAD 2025 intro: Application menu, Quick Access Toolbar, Ribbon, Workspace, Command Line
+https://www.youtube.com/watch?v=Fcgj0fYI8LM
+
+# --- Drawing Primitives ---
+# LINE command
+https://www.youtube.com/watch?v=qgvWp6eV8fU
+# CIRCLE — Draw Circles AutoCAD 2024 (CADREGION, has SRT)
+https://www.youtube.com/watch?v=mMSZOChpfCc
+# RECTANGLE and POLYGON
+https://www.youtube.com/watch?v=ycL9N4M9rCc
+
+# --- Modify Commands ---
+# TRIM
+https://www.youtube.com/watch?v=2OcZhZwWuXM
+# EXTEND — dedicated video (separate from TRIM)
+https://www.youtube.com/watch?v=oY3rxN2AHhg
+# OFFSET — explicitly covers parallel lines at a distance
+https://www.youtube.com/watch?v=TdQQbaf9b4Y
+# MIRROR
+https://www.youtube.com/watch?v=1YzJLqHU_hY
+# FILLET and CHAMFER (combined)
+https://www.youtube.com/watch?v=L2cyzblCvXE
+# CHAMFER — dedicated video for 45-degree corners
+https://www.youtube.com/watch?v=gRWw9e4FUic
+# ROTATE — rotate objects around a point
+https://www.youtube.com/watch?v=55PYfpiP0hQ
+# SCALE — scale drawing up or down
+https://www.youtube.com/watch?v=jn18glkia98
+
+# --- Annotation and Organization ---
+# HATCH
+https://www.youtube.com/watch?v=xKn0G2041mA
+# LAYER — working with layers (organise objects)
+https://www.youtube.com/watch?v=O_TbQnS0B4g
+# LAYER — hide/show layers (for "hide groups" queries)
+https://www.youtube.com/watch?v=OTZE5OEYcRI
+# BLOCK — Create Blocks or Symbols (reusable symbols)
+https://www.youtube.com/watch?v=zlgwUBokcKI
+# DIMENSION — Linear, Aligned, Angular, Radius (comprehensive measurements)
+https://www.youtube.com/watch?v=woJtzlCA9Ok

@@ -24,6 +24,7 @@ SCHEMA_STATEMENTS = (
         source TEXT,
         content TEXT,
         embedding vector({VECTOR_DIMENSION}),
+        metadata JSONB DEFAULT '{{}}'::jsonb,
         created_at TIMESTAMPTZ DEFAULT now()
     );
     """,
@@ -32,6 +33,11 @@ SCHEMA_STATEMENTS = (
     ON embeddings
     USING ivfflat (embedding vector_cosine_ops)
     WITH (lists = 100);
+    """,
+    """
+    ALTER TABLE embeddings
+    -- Backward-compatible migration for databases created before Phase D.
+    ADD COLUMN IF NOT EXISTS metadata JSONB DEFAULT '{}'::jsonb;
     """,
     """
     CREATE TABLE IF NOT EXISTS training_examples (

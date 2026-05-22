@@ -34,7 +34,7 @@ def _command() -> CommandRequest:
 
 
 def test_e2e_context_logging_with_perception_and_rag(monkeypatch) -> None:
-    captured = {}
+    captured = {"broadcast_tokens": [], "broadcast_done_calls": []}
     scheduled_tasks = []
 
     async def fake_build_context_packet_foundation(pool, task_id, command):
@@ -53,6 +53,16 @@ def test_e2e_context_logging_with_perception_and_rag(monkeypatch) -> None:
         captured["logged_task_id"] = task_id
         captured["logged_session_id"] = foundation.session_id
         captured["logged_context"] = retrieved_context
+
+    async def fake_stream_guidance(command_text, active_tool, context_docs, command_sequence):
+        for token in ["Try ", "the ", "LINE ", "tool"]:
+            yield token
+
+    async def fake_broadcast_token(session_id, token):
+        captured["broadcast_tokens"].append(token)
+
+    async def fake_broadcast_done(session_id):
+        captured["broadcast_done_calls"].append(session_id)
 
     def fake_create_task(coro):
         task = asyncio.get_running_loop().create_task(coro)
@@ -74,6 +84,9 @@ def test_e2e_context_logging_with_perception_and_rag(monkeypatch) -> None:
         "safe_persist_command_feedback",
         fake_safe_persist_command_feedback,
     )
+    monkeypatch.setattr(command_pipeline_service, "stream_guidance", fake_stream_guidance)
+    monkeypatch.setattr(command_pipeline_service, "broadcast_token", fake_broadcast_token)
+    monkeypatch.setattr(command_pipeline_service, "broadcast_done", fake_broadcast_done)
     monkeypatch.setattr(command_pipeline_service.asyncio, "create_task", fake_create_task)
 
     async def run() -> None:
@@ -94,3 +107,5 @@ def test_e2e_context_logging_with_perception_and_rag(monkeypatch) -> None:
     assert captured["logged_session_id"] == "session-e2e"
     assert captured["logged_context"][0]["doc_id"] == "doc-rag-1"
     assert command_pipeline_service.WEEK2_ERROR_DETECT_ENABLED is False
+    assert captured["broadcast_tokens"] == ["Try ", "the ", "LINE ", "tool"]
+    assert captured["broadcast_done_calls"] == ["session-e2e"]

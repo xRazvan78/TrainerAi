@@ -54,3 +54,11 @@ def test_settings_derives_database_url_from_parts(monkeypatch) -> None:
 
     assert settings.database_url == expected
     assert settings.resolved_database_url() == expected
+
+
+def test_llm_settings_have_correct_defaults(monkeypatch) -> None:
+    monkeypatch.delenv("DOCKER_MODEL_RUNNER_URL", raising=False)
+    monkeypatch.delenv("LLM_MODEL", raising=False)
+    settings = Settings(_env_file=None)
+    assert settings.docker_model_runner_url == "http://localhost:12434/engines/llama.cpp/v1"
+    assert settings.llm_model == "ai/qwen3.5:35B-A3B-Q4_K_M"

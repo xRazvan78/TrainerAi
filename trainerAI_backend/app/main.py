@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from app.db.postgres import shutdown_database, startup_database
 from app.routers.command import router as command_router
 from app.routers.db_crud import router as db_router
+from app.routers.guidance import router as guidance_router
 from app.routers.perception import router as perception_router
 
 
@@ -25,6 +26,7 @@ def create_app() -> FastAPI:
     app.include_router(db_router)
     app.include_router(command_router)
     app.include_router(perception_router)
+    app.include_router(guidance_router)
     return app
 
 

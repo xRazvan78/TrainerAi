@@ -13,7 +13,11 @@
       "Bash(docker exec trainerai_postgres *)",
       "Bash(Get-Service -Name \"postgresql*\")",
       "Bash(Get-Process -Name \"postgres\" -ErrorAction SilentlyContinue)",
-      "PowerShell(Get-Service *)"
+      "PowerShell(Get-Service *)",
+      "Bash(python -m pytest tests/test_llm_service.py -v)",
+      "Bash(python *)",
+      "Bash(powershell *)",
+      "Bash(python3 -m pytest --version)"
     ]
   }
 }

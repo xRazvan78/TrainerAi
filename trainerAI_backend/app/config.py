@@ -11,6 +11,14 @@ class Settings(BaseSettings):
     postgres_user: str = Field(default="", validation_alias="POSTGRES_USER")
     postgres_password: str = Field(default="", validation_alias="POSTGRES_PASSWORD")
     postgres_db: str = Field(default="", validation_alias="POSTGRES_DB")
+    docker_model_runner_url: str = Field(
+        default="http://localhost:12434/engines/llama.cpp/v1",
+        validation_alias="DOCKER_MODEL_RUNNER_URL",
+    )
+    llm_model: str = Field(
+        default="ai/qwen3.5:35B-A3B-Q4_K_M",
+        validation_alias="LLM_MODEL",
+    )
 
     model_config = SettingsConfigDict(
         env_file=(".env"),

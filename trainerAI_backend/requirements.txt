@@ -8,3 +8,4 @@ sentence-transformers>=3.0.0
 torch>=2.3.0
 openai-whisper>=20231117
 opencv-python-headless>=4.10.0
+httpx>=0.27.0

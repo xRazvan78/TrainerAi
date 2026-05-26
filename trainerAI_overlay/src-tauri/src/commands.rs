@@ -1,22 +1,112 @@
-use tauri::command;
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::OnceLock;
+use std::time::Duration;
 
-#[command]
-pub fn set_clickthrough(window: tauri::WebviewWindow, enabled: bool) -> Result<(), String> {
-    window
-        .set_ignore_cursor_events(enabled)
-        .map_err(|e| e.to_string())
+use serde_json::json;
+use tauri::WebviewWindow;
+use windows::Win32::Foundation::HWND;
+
+use crate::capture::{capture_window_frame, find_autocad_hwnd, hamming};
+
+static CAPTURE_RUNNING: AtomicBool = AtomicBool::new(false);
+static HTTP_CLIENT: OnceLock<reqwest::Client> = OnceLock::new();
+
+#[tauri::command]
+pub fn set_clickthrough(window: WebviewWindow, enabled: bool) -> Result<(), String> {
+    window.set_ignore_cursor_events(enabled).map_err(|e| e.to_string())
 }
 
-#[command]
+#[tauri::command]
 pub async fn start_capture() -> Result<String, String> {
-    // Aici vei inițializa captura de ecran (WGC)
-    println!("Starting screen capture...");
-    Ok("Capture started".to_string())
+    if CAPTURE_RUNNING.swap(true, Ordering::SeqCst) {
+        return Ok("already_running".into());
+    }
+
+    let backend_url = std::env::var("BACKEND_URL")
+        .unwrap_or_else(|_| "http://localhost:8000".into());
+    if !backend_url.starts_with("http://localhost") && !backend_url.starts_with("http://127.0.0.1") {
+        eprintln!("[capture] BACKEND_URL must start with http://localhost or http://127.0.0.1, got: {backend_url}");
+        CAPTURE_RUNNING.store(false, Ordering::SeqCst);
+        return Err("invalid BACKEND_URL".into());
+    }
+
+    let session_id = std::env::var("SESSION_ID")
+        .unwrap_or_else(|_| "default-session".into());
+    // Temporary stub — Phase F replaces this with real session management.
+
+    tokio::spawn(async move {
+        // Guard: reset CAPTURE_RUNNING to false if this task exits for any reason.
+        struct RunGuard;
+        impl Drop for RunGuard {
+            fn drop(&mut self) {
+                CAPTURE_RUNNING.store(false, Ordering::SeqCst);
+            }
+        }
+        let _guard = RunGuard;
+
+        let client = HTTP_CLIENT.get_or_init(reqwest::Client::new);
+        let mut last_hash: Option<u64> = None;
+        let mut interval = tokio::time::interval(Duration::from_millis(500));
+
+        while CAPTURE_RUNNING.load(Ordering::SeqCst) {
+            interval.tick().await;
+
+            // find_autocad_hwnd and capture_window_frame both use non-Send types
+            // (HWND wraps *mut c_void). Run them on a blocking thread and pass
+            // the result back as a Send-safe tuple.
+            let frame_result = tokio::task::spawn_blocking(|| {
+                let hwnd_isize: isize = find_autocad_hwnd().map(|h| h.0 as isize)?;
+                let hwnd = HWND(hwnd_isize as *mut std::ffi::c_void);
+                capture_window_frame(hwnd)
+            })
+            .await;
+
+            let frame = match frame_result {
+                Ok(Some(f)) => f,
+                _ => continue,
+            };
+
+            if let Some(prev) = last_hash {
+                if hamming(frame.hash, prev) < 10 {
+                    continue;
+                }
+            }
+            last_hash = Some(frame.hash);
+
+            let payload = json!({
+                "session_id": session_id,
+                "timestamp": chrono::Utc::now().to_rfc3339(),
+                "elements": [],
+                "source": "wgc_capture",
+                "frame_hash": format!("{:016x}", frame.hash),
+                "frame_b64": frame.jpeg_b64,
+            });
+
+            match client
+                .post(format!("{backend_url}/api/perception/state"))
+                .json(&payload)
+                .send()
+                .await
+                .and_then(|r| r.error_for_status())
+            {
+                Ok(_) => {}
+                Err(err) => eprintln!("[capture] POST failed: {err}"),
+            }
+        }
+    });
+
+    Ok("started".into())
 }
 
-#[command]
+#[tauri::command]
+pub fn stop_capture() -> String {
+    CAPTURE_RUNNING.store(false, Ordering::SeqCst);
+    "stopped".into()
+}
+
+#[tauri::command]
 pub async fn get_ai_advice() -> Result<String, String> {
-    // Aici vei apela modelul AI local (Qwen/Granite)
-    // Pentru acum returnăm un mock
-    Ok("Atenție: Ai desenat pe stratul '0'. Mută pe 'A-WALL'.".to_string())
+    // Deprecated in Phase E; Phase F replaces this with a WebSocket client
+    // streaming guidance from /api/guidance/ws/{session_id}.
+    Ok("get_ai_advice is deprecated — Phase F wires WebSocket streaming.".into())
 }

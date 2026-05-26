@@ -1,3 +1,4 @@
+pub mod capture;
 pub mod commands;
 use tauri::Manager;
 
@@ -30,8 +31,8 @@ pub fn run() {
                         // The overlay panel is in the top-left corner:
                         //   margin 20px + width 320px + padding → x: 0–370
                         //   margin 20px + height ~500px + padding → y: 0–540
-                        let in_panel = rel_x >= 0.0 && rel_x < 370.0
-                            && rel_y >= 0.0 && rel_y < 540.0;
+                        let in_panel = (0.0..370.0).contains(&rel_x)
+                            && (0.0..540.0).contains(&rel_y);
 
                         let _ = window_clone.set_ignore_cursor_events(!in_panel);
                     }
@@ -43,6 +44,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             commands::set_clickthrough,
             commands::start_capture,
+            commands::stop_capture,
             commands::get_ai_advice
         ])
         .run(tauri::generate_context!())

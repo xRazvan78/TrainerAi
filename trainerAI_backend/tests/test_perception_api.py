@@ -81,7 +81,7 @@ def test_perception_payload_persisted_jsonb(monkeypatch) -> None:
             }
         ],
         "source": "perception_pipeline",
-        "frame_hash": "frame-abc",
+        "frame_hash": "a1b2c3d4e5f60000",
     }
 
     with _build_client(monkeypatch) as client:

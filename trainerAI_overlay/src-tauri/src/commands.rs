@@ -105,8 +105,29 @@ pub fn stop_capture() -> String {
 }
 
 #[tauri::command]
-pub async fn get_ai_advice() -> Result<String, String> {
-    // Deprecated in Phase E; Phase F replaces this with a WebSocket client
-    // streaming guidance from /api/guidance/ws/{session_id}.
-    Ok("get_ai_advice is deprecated — Phase F wires WebSocket streaming.".into())
+pub async fn send_command(text: String) -> Result<(), String> {
+    use chrono::Utc;
+    let backend = std::env::var("BACKEND_URL")
+        .unwrap_or_else(|_| "http://localhost:8000".to_string());
+    if !backend.starts_with("http://localhost") && !backend.starts_with("http://127.0.0.1") {
+        return Err("invalid BACKEND_URL".into());
+    }
+    let session_id = std::env::var("SESSION_ID")
+        .unwrap_or_else(|_| "default-session".to_string());
+
+    let body = serde_json::json!({
+        "text": text,
+        "timestamp": Utc::now().to_rfc3339(),
+        "session_id": session_id,
+    });
+
+    let client = HTTP_CLIENT.get_or_init(reqwest::Client::new);
+    client
+        .post(format!("{backend}/api/command"))
+        .json(&body)
+        .send()
+        .await
+        .and_then(|r| r.error_for_status())
+        .map(|_| ())
+        .map_err(|e| e.to_string())
 }

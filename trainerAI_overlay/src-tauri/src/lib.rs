@@ -1,5 +1,6 @@
 pub mod capture;
 pub mod commands;
+pub mod ws_client;
 use tauri::Manager;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -39,13 +40,22 @@ pub fn run() {
                 }
             });
 
+            let app_handle_ws = app.handle().clone();
+            tauri::async_runtime::spawn(async move {
+                let session_id = std::env::var("SESSION_ID")
+                    .unwrap_or_else(|_| "default-session".to_string());
+                let backend_ws = std::env::var("BACKEND_WS_URL")
+                    .unwrap_or_else(|_| "ws://localhost:8000".to_string());
+                ws_client::connect_and_stream(app_handle_ws, session_id, backend_ws).await;
+            });
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             commands::set_clickthrough,
             commands::start_capture,
             commands::stop_capture,
-            commands::get_ai_advice
+            commands::send_command,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

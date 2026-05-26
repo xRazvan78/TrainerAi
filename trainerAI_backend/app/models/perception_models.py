@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 from typing import Literal
 
@@ -31,6 +32,7 @@ class PerceptionStateRequest(BaseModel):
     elements: list[PerceptionElement] = Field(default_factory=list)
     source: str = "perception_pipeline"
     frame_hash: str | None = None
+    frame_b64: str | None = None
 
     @field_validator("session_id")
     @classmethod
@@ -51,6 +53,20 @@ class PerceptionStateRequest(BaseModel):
             raise ValueError(ISO_TIMESTAMP_ERROR) from exc
         if parsed.tzinfo is None or parsed.utcoffset() is None:
             raise ValueError(ISO_TIMESTAMP_ERROR)
+        return value
+
+    @field_validator("frame_b64")
+    @classmethod
+    def validate_frame_b64_size(cls, value: str | None) -> str | None:
+        if value is not None and len(value) > 280_000:
+            raise ValueError("frame_b64 must not exceed 280000 characters")
+        return value
+
+    @field_validator("frame_hash")
+    @classmethod
+    def validate_frame_hash_format(cls, value: str | None) -> str | None:
+        if value is not None and not re.fullmatch(r"[0-9a-f]{16}", value):
+            raise ValueError("frame_hash must be a 16-character lowercase hex string")
         return value
 
 

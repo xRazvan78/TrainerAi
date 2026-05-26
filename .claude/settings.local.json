@@ -17,7 +17,9 @@
       "Bash(python -m pytest tests/test_llm_service.py -v)",
       "Bash(python *)",
       "Bash(powershell *)",
-      "Bash(python3 -m pytest --version)"
+      "Bash(python3 -m pytest --version)",
+      "Bash(cargo build *)",
+      "Bash(cargo check *)"
     ]
   }
 }

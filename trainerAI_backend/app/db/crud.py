@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from typing import Any, Sequence
 
 import asyncpg
@@ -292,17 +293,18 @@ async def create_perception_state(
     observed_at: str,
 ) -> dict[str, Any] | None:
     payload_json = json.dumps(payload)
+    observed_at_dt = datetime.fromisoformat(observed_at.replace("Z", "+00:00"))
 
     async with pool.acquire() as connection:
         record = await connection.fetchrow(
             """
             INSERT INTO perception_states (session_id, payload, observed_at)
-            VALUES ($1, $2::jsonb, $3::timestamptz)
+            VALUES ($1, $2::jsonb, $3)
             RETURNING id, session_id, payload, observed_at, created_at;
             """,
             session_id,
             payload_json,
-            observed_at,
+            observed_at_dt,
         )
     return _record_to_dict(record)
 

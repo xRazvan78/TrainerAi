@@ -16,7 +16,7 @@
     "hash": "15a46a2edbfa7a642754e7f2ffa7c68d"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\db\\crud.py": {
-    "mtime": 1779828874.3329263,
+    "mtime": 1779830944.3839488,
     "hash": "4766c0335ccbc3c3f5d4cb3203337cb0"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\db\\postgres.py": {
@@ -40,7 +40,7 @@
     "hash": "7695054e629b742dbd3419486c143e66"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\models\\perception_models.py": {
-    "mtime": 1779825491.337912,
+    "mtime": 1779830944.3849542,
     "hash": "acca9f4a62c468e9faa41fdf76b28801"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\app\\models\\__init__.py": {
@@ -168,7 +168,7 @@
     "hash": "1fcbabb457675f27f0adb86631390430"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\tests\\test_perception_api.py": {
-    "mtime": 1779825892.6323543,
+    "mtime": 1779830944.3889506,
     "hash": "3fd797ac52ccd681f55fa0cd75040495"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\tests\\test_rag_service.py": {
@@ -180,8 +180,8 @@
     "hash": "2d50d056066da0204f8db1bdf2c5323f"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_overlay\\src\\main.rs": {
-    "mtime": 1775577605.8908346,
-    "hash": "6f98bddc94799d07583491695b4cc9f2"
+    "mtime": 1779834363.4864614,
+    "hash": "09a1fd17742b55c1c92fa6979d19dedd"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_overlay\\src\\renderer\\app.rs": {
     "mtime": 1775572868.6342926,
@@ -196,20 +196,24 @@
     "hash": "667702979da61fdc96948886b7cd7a33"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_overlay\\src-tauri\\src\\capture.rs": {
-    "mtime": 1779830069.8266537,
-    "hash": "5a4f328ea35c7ce1a0a0f4c8fafa9ac6"
+    "mtime": 1779830944.3909488,
+    "hash": "d7d323cdf6078ee03e6a1435ff6bf6ee"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_overlay\\src-tauri\\src\\commands.rs": {
-    "mtime": 1779830075.5442846,
-    "hash": "09a73ba0b72e88e0bcc8a52d6125a488"
+    "mtime": 1779832886.0447493,
+    "hash": "4bcacb954c31187cc72b231e59c42175"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_overlay\\src-tauri\\src\\lib.rs": {
-    "mtime": 1779440354.722872,
-    "hash": "606908dcb46724a0399ef266ad725a3f"
+    "mtime": 1779832561.0747292,
+    "hash": "bbfb4baf1d8b1e873101289a5170eafc"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_overlay\\src-tauri\\src\\main.rs": {
     "mtime": 1775572868.632298,
     "hash": "35337a15f3b0b9d63d5c52c04b322ec9"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_overlay\\src-tauri\\src\\ws_client.rs": {
+    "mtime": 1779835122.3525019,
+    "hash": "81c46f39c86f4b45209893e4df4669f2"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\CLAUDE.md": {
     "mtime": 1778438057.4802966,
@@ -388,12 +392,36 @@
     "hash": "20cb123ead25ff6ec0d284e0b5ff94ff"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-E\\code-review-findings.md": {
-    "mtime": 1779825935.079628,
-    "hash": "9a24a0c5bd89b05e2e605880847a6630"
+    "mtime": 1779830944.3819492,
+    "hash": "a3109295adf1ec8002dc3c469c660461"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-E\\README.md": {
     "mtime": 1779438351.3580124,
     "hash": "1fd9e0b53cfa09c9d3ea8606029fce6b"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-F\\01-deps-and-ws-client.md": {
+    "mtime": 1779831852.7401972,
+    "hash": "bcc17976ccfddd7c5119b16575441b7a"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-F\\02-tauri-wiring.md": {
+    "mtime": 1779831891.2741675,
+    "hash": "0796f2b25d23faacd76d6e8209e49ee7"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-F\\03-dioxus-ui.md": {
+    "mtime": 1779831946.668754,
+    "hash": "76bd26384cbb05e7fda6db247ac222d0"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-F\\04-verification-acceptance.md": {
+    "mtime": 1779831985.812564,
+    "hash": "e033c2ddca95bf2867d26e5be7b91283"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-F\\code-review-findings.md": {
+    "mtime": 1779832934.3441772,
+    "hash": "f92b86e35f636c0593579ad75a1209a2"
+  },
+  "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\specs\\phase-F\\README.md": {
+    "mtime": 1779831815.7134986,
+    "hash": "d763f6c361cb7928d94e05342f210d9c"
   },
   "D:\\faculta\\An_3\\Semestru_1\\Inteligenta_Artificiala\\Proiect\\TrainerAi\\trainerAI_backend\\requirements.txt": {
     "mtime": 1779437554.1600854,

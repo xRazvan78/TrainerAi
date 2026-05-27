@@ -24,7 +24,9 @@
       "Bash(Out-Null)",
       "Bash(New-Item -ItemType File -Force -Path \"D:\\\\faculta\\\\An_3\\\\Semestru_1\\\\Inteligenta_Artificiala\\\\Proiect\\\\TrainerAi\\\\trainerAI_backend\\\\app\\\\models_weights\\\\.gitkeep\")",
       "Bash(Write-Output \"done\")",
-      "Bash(.\\\\.venv\\\\Scripts\\\\python.exe -m pytest tests/ -q)"
+      "Bash(.\\\\.venv\\\\Scripts\\\\python.exe -m pytest tests/ -q)",
+      "Bash(Get-ChildItem -Path \"D:\\\\faculta\\\\An_3\\\\Semestru_1\\\\Inteligenta_Artificiala\\\\Proiect\\\\TrainerAi\\\\trainerAI_overlay\" -Recurse -Filter \"*.rs\")",
+      "Bash(Select-Object -ExpandProperty FullName)"
     ]
   }
 }

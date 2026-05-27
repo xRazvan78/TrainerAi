@@ -11,6 +11,11 @@ pub struct GuidanceToken {
     pub done: bool,
 }
 
+#[derive(Clone, Serialize)]
+pub struct WsStatus {
+    pub connected: bool,
+}
+
 pub async fn connect_and_stream(
     app: tauri::AppHandle,
     session_id: String,
@@ -35,6 +40,7 @@ pub async fn connect_and_stream(
         match connect_async(&url).await {
             Ok((mut ws, _)) => {
                 eprintln!("[ws_client] connected to {url}");
+                let _ = tauri::Emitter::emit(&app, "guidance-ws-status", WsStatus { connected: true });
                 backoff = Duration::from_secs(1); // reset on successful connect
                 while let Some(Ok(msg)) = ws.next().await {
                     if let Message::Text(text) = msg {
@@ -54,7 +60,7 @@ pub async fn connect_and_stream(
                                     let _ = tauri::Emitter::emit(
                                         &app,
                                         "guidance-token",
-                                        GuidanceToken { token: text.to_string(), done: false },
+                                        GuidanceToken { token: text, done: false },
                                     );
                                 }
                             }
@@ -63,14 +69,18 @@ pub async fn connect_and_stream(
                             let _ = tauri::Emitter::emit(
                                 &app,
                                 "guidance-token",
-                                GuidanceToken { token: text.to_string(), done: false },
+                                GuidanceToken { token: text, done: false },
                             );
                         }
                     }
                 }
+                let _ = tauri::Emitter::emit(&app, "guidance-ws-status", WsStatus { connected: false });
                 eprintln!("[ws_client] disconnected, reconnecting in {}s...", backoff.as_secs());
             }
-            Err(e) => eprintln!("[ws_client] connect failed: {e}, retrying in {}s...", backoff.as_secs()),
+            Err(e) => {
+                eprintln!("[ws_client] connect failed: {e}, retrying in {}s...", backoff.as_secs());
+                let _ = tauri::Emitter::emit(&app, "guidance-ws-status", WsStatus { connected: false });
+            }
         }
         tokio::time::sleep(backoff).await;
         backoff = (backoff * 2).min(MAX_BACKOFF);

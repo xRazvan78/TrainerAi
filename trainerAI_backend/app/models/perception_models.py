@@ -58,8 +58,8 @@ class PerceptionStateRequest(BaseModel):
     @field_validator("frame_b64")
     @classmethod
     def validate_frame_b64_size(cls, value: str | None) -> str | None:
-        if value is not None and len(value) > 280_000:
-            raise ValueError("frame_b64 must not exceed 280000 characters")
+        if value is not None and len(value) > 2_000_000:
+            raise ValueError("frame_b64 must not exceed 2000000 characters")
         return value
 
     @field_validator("frame_hash")

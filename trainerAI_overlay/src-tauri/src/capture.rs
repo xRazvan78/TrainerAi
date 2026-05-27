@@ -220,16 +220,12 @@ fn finish_frame(raw: RawFrame) -> Option<CapturedFrame> {
 
     let img = image::RgbaImage::from_raw(w, h, rgba).map(image::DynamicImage::ImageRgba8)?;
 
-    // Downscale 50 %.
-    let new_w = (w / 2).max(1);
-    let new_h = (h / 2).max(1);
-    let resized = img.resize_exact(new_w, new_h, FilterType::Triangle);
+    // Perceptual hash (ahash uses internal 8×8 reduction, unaffected by resolution).
+    let hash = ahash(&img);
 
-    // Perceptual hash of the downscaled image.
-    let hash = ahash(&resized);
-
-    // JPEG encode at quality 75.
-    let bytes = encode_jpeg(&resized)?;
+    // JPEG encode at quality 75. Full resolution is required so that EasyOCR can
+    // read the AutoCAD command line text (~14px tall at 1080p, illegible at 50% scale).
+    let bytes = encode_jpeg(&img)?;
 
     let jpeg_b64 =
         base64::engine::general_purpose::STANDARD.encode(&bytes);
@@ -237,8 +233,8 @@ fn finish_frame(raw: RawFrame) -> Option<CapturedFrame> {
     Some(CapturedFrame {
         jpeg_b64,
         hash,
-        width: new_w,
-        height: new_h,
+        width: w,
+        height: h,
     })
 }
 

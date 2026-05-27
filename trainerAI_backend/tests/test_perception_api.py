@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 
 import app.main as main_module
 import app.routers.perception as perception_router
+from app.models.perception_models import PerceptionElement
 
 
 async def _noop_lifespan(_: FastAPI) -> None:
@@ -96,3 +97,136 @@ def test_perception_payload_persisted_jsonb(monkeypatch) -> None:
     assert captured["session_id"] == payload["session_id"]
     assert isinstance(captured["payload"], dict)
     assert captured["payload"]["elements"][0]["text"] == "Login"
+
+
+def test_perception_state_enriches_with_analyse_frame_when_frame_b64_present(monkeypatch) -> None:
+    captured = {}
+
+    async def fake_create_perception_state(pool, session_id, payload, observed_at):
+        captured["payload"] = payload
+        return {
+            "id": 42,
+            "session_id": session_id,
+            "payload": payload,
+            "observed_at": observed_at,
+            "created_at": observed_at,
+        }
+
+    monkeypatch.setattr(
+        perception_router.crud,
+        "create_perception_state",
+        fake_create_perception_state,
+    )
+    monkeypatch.setattr(
+        perception_router,
+        "analyse_frame",
+        lambda frame_b64: [
+            PerceptionElement(
+                label="command_line",
+                bbox=[0, 170, 200, 200],
+                text="LINE",
+                confidence=1.0,
+            )
+        ],
+    )
+
+    payload = {
+        "session_id": "session-enrich",
+        "timestamp": "2026-04-22T10:00:00Z",
+        "elements": [],
+        "frame_b64": "dGVzdA==",
+    }
+
+    with _build_client(monkeypatch) as client:
+        response = client.post("/api/perception/state", json=payload)
+
+    assert response.status_code == 201
+    assert isinstance(captured["payload"]["elements"], list)
+    assert len(captured["payload"]["elements"]) == 1
+    enriched = captured["payload"]["elements"][0]
+    assert enriched["label"] == "command_line"
+    assert enriched["text"] == "LINE"
+
+
+def test_perception_state_does_not_persist_frame_b64(monkeypatch) -> None:
+    captured = {}
+
+    async def fake_create_perception_state(pool, session_id, payload, observed_at):
+        captured["payload"] = payload
+        return {
+            "id": 99,
+            "session_id": session_id,
+            "payload": payload,
+            "observed_at": observed_at,
+            "created_at": observed_at,
+        }
+
+    monkeypatch.setattr(
+        perception_router.crud,
+        "create_perception_state",
+        fake_create_perception_state,
+    )
+    monkeypatch.setattr(
+        perception_router,
+        "analyse_frame",
+        lambda frame_b64: [],
+    )
+
+    payload = {
+        "session_id": "session-no-persist-b64",
+        "timestamp": "2026-04-22T10:00:00Z",
+        "elements": [],
+        "frame_b64": "dGVzdA==",
+    }
+
+    with _build_client(monkeypatch) as client:
+        response = client.post("/api/perception/state", json=payload)
+
+    assert response.status_code == 201
+    assert "frame_b64" not in captured["payload"]
+
+
+def test_perception_state_does_not_enrich_when_elements_prepopulated(monkeypatch) -> None:
+    captured = {}
+    analyse_frame_called = []
+
+    async def fake_create_perception_state(pool, session_id, payload, observed_at):
+        captured["payload"] = payload
+        return {
+            "id": 43,
+            "session_id": session_id,
+            "payload": payload,
+            "observed_at": observed_at,
+            "created_at": observed_at,
+        }
+
+    monkeypatch.setattr(
+        perception_router.crud,
+        "create_perception_state",
+        fake_create_perception_state,
+    )
+    monkeypatch.setattr(
+        perception_router,
+        "analyse_frame",
+        lambda frame_b64: analyse_frame_called.append(True) or [],
+    )
+
+    payload = {
+        "session_id": "session-prepopulated",
+        "timestamp": "2026-04-22T10:00:00Z",
+        "elements": [
+            {
+                "label": "button",
+                "bbox": [10, 20, 110, 80],
+                "text": "Save",
+                "confidence": 0.9,
+            }
+        ],
+        "frame_b64": "dGVzdA==",
+    }
+
+    with _build_client(monkeypatch) as client:
+        response = client.post("/api/perception/state", json=payload)
+
+    assert response.status_code == 201
+    assert analyse_frame_called == []

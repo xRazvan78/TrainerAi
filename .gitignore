@@ -14,3 +14,4 @@ training_videos/*.vtt
 *.mkv
 *.webm
 *.wav
+trainerAI_backend/app/models_weights/*.pt

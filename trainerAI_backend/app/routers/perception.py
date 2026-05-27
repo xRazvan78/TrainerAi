@@ -1,8 +1,11 @@
+import asyncio
+
 import asyncpg
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 
 from app.db import crud
 from app.models.perception_models import PerceptionStatePersistedResponse, PerceptionStateRequest
+from app.services.perception_service import analyse_frame
 
 router = APIRouter(prefix="/api/perception", tags=["perception"])
 
@@ -23,10 +26,15 @@ async def ingest_perception_state(
     payload: PerceptionStateRequest,
     pool: asyncpg.Pool = Depends(get_db_pool),
 ) -> PerceptionStatePersistedResponse:
+    if payload.frame_b64 and not payload.elements:
+        detected = await asyncio.to_thread(analyse_frame, payload.frame_b64)
+        if detected:
+            payload = payload.model_copy(update={"elements": detected})
+
     persisted = await crud.create_perception_state(
         pool=pool,
         session_id=payload.session_id,
-        payload=payload.model_dump(mode="python"),
+        payload=payload.model_dump(mode="python", exclude={"frame_b64"}),
         observed_at=payload.timestamp,
     )
     if persisted is None:

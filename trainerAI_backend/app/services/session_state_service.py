@@ -16,6 +16,22 @@ def _extract_active_tool(command_text: str) -> str:
     return cleaned.upper() if cleaned else "UNKNOWN"
 
 
+def _extract_active_tool_from_perception(perception_state: dict | None) -> str | None:
+    if not perception_state:
+        return None
+    for el in perception_state.get("elements", []):
+        if el.get("label") != "command_line":
+            continue
+        text = (el.get("text") or "").strip().upper()
+        if not text:
+            continue
+        text = text.removeprefix("COMMAND: ").strip()
+        parts = text.split()
+        if parts:
+            return parts[0]
+    return None
+
+
 def _normalize_command_sequence(value: Any) -> list[str]:
     if not isinstance(value, list):
         return []
@@ -50,6 +66,13 @@ async def update_session_from_command(
     current = await _ensure_session_exists(pool=pool, session_id=command.session_id)
 
     active_tool = _extract_active_tool(command.text)
+    latest_perception_row = await crud.get_latest_perception_state(pool, command.session_id)
+    perception_payload = (
+        latest_perception_row["payload"] if latest_perception_row else None
+    )
+    perception_tool = _extract_active_tool_from_perception(perception_payload)
+    if perception_tool:
+        active_tool = perception_tool
     existing_sequence = _normalize_command_sequence(current.get("command_sequence"))
     command_sequence = _build_next_command_sequence(existing_sequence, active_tool)
     action_count = int(current.get("action_count") or 0) + 1

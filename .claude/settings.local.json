@@ -19,7 +19,12 @@
       "Bash(powershell *)",
       "Bash(python3 -m pytest --version)",
       "Bash(cargo build *)",
-      "Bash(cargo check *)"
+      "Bash(cargo check *)",
+      "Bash(New-Item -ItemType Directory -Force -Path \"D:\\\\faculta\\\\An_3\\\\Semestru_1\\\\Inteligenta_Artificiala\\\\Proiect\\\\TrainerAi\\\\trainerAI_backend\\\\app\\\\models_weights\")",
+      "Bash(Out-Null)",
+      "Bash(New-Item -ItemType File -Force -Path \"D:\\\\faculta\\\\An_3\\\\Semestru_1\\\\Inteligenta_Artificiala\\\\Proiect\\\\TrainerAi\\\\trainerAI_backend\\\\app\\\\models_weights\\\\.gitkeep\")",
+      "Bash(Write-Output \"done\")",
+      "Bash(.\\\\.venv\\\\Scripts\\\\python.exe -m pytest tests/ -q)"
     ]
   }
 }

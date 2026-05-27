@@ -144,3 +144,38 @@ def test_command_context_reads_latest_persisted_perception(monkeypatch) -> None:
     )
 
     assert foundation.perception_state == stores["perception"]["session-context"]
+
+
+def test_active_tool_prefers_perception_over_typed_command(monkeypatch) -> None:
+    stores = _install_fake_crud(monkeypatch)
+    stores["perception"]["session-override"] = {
+        "elements": [{"label": "command_line", "text": "Command: CIRCLE"}]
+    }
+
+    command = _build_command(
+        text="LINE",
+        timestamp="2026-04-22T10:00:00Z",
+        session_id="session-override",
+    )
+
+    snapshot = asyncio.run(
+        session_state_service.update_session_from_command(pool=object(), command=command)
+    )
+
+    assert snapshot.active_tool == "CIRCLE"
+
+
+def test_active_tool_falls_back_to_typed_command_when_no_perception(monkeypatch) -> None:
+    _install_fake_crud(monkeypatch)
+
+    command = _build_command(
+        text="LINE",
+        timestamp="2026-04-22T10:00:00Z",
+        session_id="session-no-perception",
+    )
+
+    snapshot = asyncio.run(
+        session_state_service.update_session_from_command(pool=object(), command=command)
+    )
+
+    assert snapshot.active_tool == "LINE"

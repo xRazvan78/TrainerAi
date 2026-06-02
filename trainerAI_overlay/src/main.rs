@@ -106,23 +106,22 @@ fn App() -> Element {
     rsx! {
         style { "
             html, body, #main, #dioxus-root {{ background: transparent !important; background-color: transparent !important; margin: 0; padding: 0; overflow: hidden; width: 100vw; height: 100vh; }}
-            .overlay-container {{ background-color: rgba(15, 23, 42, 0.85); color: white; padding: 24px; border-radius: 12px; width: 320px; margin: 20px; font-family: system-ui, sans-serif; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); }}
-            .btn {{ width: 100%; padding: 10px; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 8px; }}
-            .btn-blue {{ background: #3b82f6; }}
-            .btn-blue:hover {{ background: #2563eb; }}
-            .btn-green {{ background: #22c55e; }}
-            .btn-green:hover {{ background: #16a34a; }}
-            .btn-gray {{ background: #475569; }}
-            .btn-gray:hover {{ background: #334155; }}
-            .guidance-panel {{ background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin: 15px 0; min-height: 80px; white-space: pre-wrap; font-size: 0.95rem; line-height: 1.5; }}
+            .overlay-container {{ background: rgba(15, 23, 42, 0.72); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 16px; width: 320px; margin: 20px; padding: 24px; font-family: system-ui, sans-serif; color: white; border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.05) inset, 0 1px 0 rgba(255,255,255,0.12) inset; }}
+            .btn {{ width: 100%; padding: 10px 16px; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: 600; margin-top: 8px; transition: transform 0.15s, opacity 0.15s; }}
+            .btn:hover {{ transform: translateY(-1px); opacity: 0.9; }}
+            .btn-blue {{ background: linear-gradient(135deg, #3b82f6, #2563eb); }}
+            .btn-blue:hover {{ background: linear-gradient(135deg, #2563eb, #1d4ed8); }}
+            .btn-gray {{ background: rgba(71, 85, 105, 0.7); }}
+            .btn-gray:hover {{ background: rgba(51, 65, 85, 0.85); }}
+            .guidance-panel {{ background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); padding: 15px; border-radius: 10px; margin: 15px 0; min-height: 80px; white-space: pre-wrap; font-size: 0.95rem; line-height: 1.6; }}
             @keyframes pulse {{ 0%, 100% {{ opacity: 1; }} 50% {{ opacity: 0.3; }} }}
         " }
 
         div { class: "overlay-container",
-            div { style: "display:flex;align-items:center;border-bottom:1px solid #334155;padding-bottom:10px;margin-bottom:15px;",
+            div { style: "display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:10px;margin-bottom:15px;gap:6px;",
                 span { style: "{dot_style}" }
                 span { style: "{ws_dot_style}" }
-                h2 { style: "margin:0;font-size:1rem;", "AutoCAD Trainer AI" }
+                h2 { style: "margin:0;font-size:1rem;letter-spacing:0.03em;font-weight:600;", "AutoCAD Trainer AI" }
             }
 
             div { class: "guidance-panel",
@@ -139,14 +138,6 @@ fn App() -> Element {
                     let _ = js_sys::eval(&js);
                 },
                 "{capture_label}"
-            }
-
-            button {
-                class: "btn btn-green",
-                onclick: move |_| {
-                    let _ = js_sys::eval("window.__TAURI__.core.invoke('send_command', { text: 'LINE' })");
-                },
-                "Send: LINE"
             }
 
             button {

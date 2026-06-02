@@ -11,12 +11,16 @@ class Settings(BaseSettings):
     postgres_user: str = Field(default="", validation_alias="POSTGRES_USER")
     postgres_password: str = Field(default="", validation_alias="POSTGRES_PASSWORD")
     postgres_db: str = Field(default="", validation_alias="POSTGRES_DB")
-    docker_model_runner_url: str = Field(
-        default="http://localhost:12434/engines/llama.cpp/v1",
-        validation_alias="DOCKER_MODEL_RUNNER_URL",
+    llm_base_url: str = Field(
+        default="https://api.mistral.ai/v1",
+        validation_alias="LLM_BASE_URL",
+    )
+    llm_api_key: str = Field(
+        default="",
+        validation_alias="LLM_API_KEY",
     )
     llm_model: str = Field(
-        default="ai/qwen3.5:35B-A3B-Q4_K_M",
+        default="mistral-small-latest",
         validation_alias="LLM_MODEL",
     )
 

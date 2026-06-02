@@ -1,5 +1,5 @@
 """
-LLM service — streams guidance from Docker Desktop Model Runner (Qwen 3.5).
+LLM service — streams guidance from Mistral AI.
 Uses the OpenAI-compatible /v1/chat/completions endpoint with httpx async streaming.
 """
 from __future__ import annotations
@@ -57,14 +57,15 @@ async def stream_guidance(
         "stream": True,
         "temperature": 0.3,
         "max_tokens": 1024,
-        "chat_template_kwargs": {"enable_thinking": False},
     }
 
+    headers = {"Authorization": f"Bearer {settings.llm_api_key}"}
     async with httpx.AsyncClient(timeout=60.0) as client:
         async with client.stream(
             "POST",
-            f"{settings.docker_model_runner_url}/chat/completions",
+            f"{settings.llm_base_url}/chat/completions",
             json=payload,
+            headers=headers,
         ) as response:
             response.raise_for_status()
             async for line in response.aiter_lines():
@@ -78,7 +79,7 @@ async def stream_guidance(
                 except json.JSONDecodeError:
                     continue
                 delta = chunk.get("choices", [{}])[0].get("delta", {})
-                token = delta.get("content", "") or delta.get("reasoning_content", "")
+                token = delta.get("content", "")
                 if token:
                     yield token
 

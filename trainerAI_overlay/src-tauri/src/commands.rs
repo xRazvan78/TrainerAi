@@ -45,7 +45,6 @@ pub async fn start_capture() -> Result<String, String> {
         let _guard = RunGuard;
 
         let client = HTTP_CLIENT.get_or_init(reqwest::Client::new);
-        let mut last_hash: Option<u64> = None;
         let mut interval = tokio::time::interval(Duration::from_millis(500));
 
         while CAPTURE_RUNNING.load(Ordering::SeqCst) {
@@ -65,13 +64,6 @@ pub async fn start_capture() -> Result<String, String> {
                 Ok(Some(f)) => f,
                 _ => continue,
             };
-
-            if let Some(prev) = last_hash {
-                if hamming(frame.hash, prev) < 10 {
-                    continue;
-                }
-            }
-            last_hash = Some(frame.hash);
 
             let payload = json!({
                 "session_id": session_id,

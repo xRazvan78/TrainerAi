@@ -11,7 +11,10 @@ logger = logging.getLogger(__name__)
 
 _WEIGHTS_PATH = Path(__file__).parent.parent / "models_weights" / "autocad_yolov8.pt"
 _YOLO_CONFIDENCE = 0.45
-_COMMAND_LINE_STRIP_PX = 30
+# AutoCAD layout (bottom → top): layout-tab strip + status bar (~60px) → command line (~100px) → canvas.
+# Skip the tab strip, then scan the command-line band above it.
+_STATUS_BAR_PX = 55
+_COMMAND_LINE_STRIP_PX = 100
 _OCR_CLASSES = frozenset({
     "command_line",
     "command_line_history",
@@ -56,27 +59,59 @@ def _decode_frame(frame_b64: str) -> np.ndarray | None:
         return None
 
 
+def _boost_contrast(region) -> "np.ndarray":
+    import numpy as np
+    from PIL import Image, ImageOps
+    img = Image.fromarray(region).convert("L")  # grayscale
+    # Invert if the background is dark (AutoCAD dark theme)
+    if np.asarray(img).mean() < 128:
+        img = ImageOps.invert(img)
+    # Upscale 2× — EasyOCR works better on larger text
+    w, h = img.size
+    img = img.resize((w * 2, h * 2), Image.LANCZOS)
+    img = ImageOps.autocontrast(img)
+    return np.asarray(img)
+
+
 def _ocr_region(frame: np.ndarray, x1: int, y1: int, x2: int, y2: int) -> str:
     region = frame[y1:y2, x1:x2]
     if region.size == 0:
         return ""
+    enhanced = _boost_contrast(region)
     try:
-        results = _get_ocr().readtext(region)
+        results = _get_ocr().readtext(enhanced, low_text=0.3, text_threshold=0.5)
     except Exception:
         logger.exception("perception_service: OCR failed for region")
         return ""
     return " ".join(r[1] for r in results).strip()
 
 
+_DEBUG_CROP_SAVED = False
+
 def _detect_command_line_heuristic(frame: np.ndarray) -> PerceptionElement | None:
+    global _DEBUG_CROP_SAVED
     h, w = frame.shape[:2]
-    y1 = max(0, h - _COMMAND_LINE_STRIP_PX)
-    text = _ocr_region(frame, 0, y1, w, h)
+    # Read the band above the status bar where the command line lives.
+    y_bottom = max(0, h - _STATUS_BAR_PX)
+    y_top = max(0, h - _STATUS_BAR_PX - _COMMAND_LINE_STRIP_PX)
+    if not _DEBUG_CROP_SAVED:
+        _DEBUG_CROP_SAVED = True
+        try:
+            from PIL import Image
+            crop = frame[y_top:y_bottom, 0:w]
+            Image.fromarray(crop).save("debug_cmdline_crop.png")
+            enhanced = _boost_contrast(crop)
+            Image.fromarray(enhanced).save("debug_cmdline_enhanced.png")
+            print(f"[ocr_heuristic] saved debug_cmdline_crop.png and debug_cmdline_enhanced.png (y={y_top}..{y_bottom})", flush=True)
+        except Exception as e:
+            print(f"[ocr_heuristic] crop save failed: {e}", flush=True)
+    text = _ocr_region(frame, 0, y_top, w, y_bottom)
+    print(f"[ocr_heuristic] raw text from y={y_top}..{y_bottom}: {text!r}", flush=True)
     if not text:
         return None
     return PerceptionElement(
         label="command_line",
-        bbox=[0, y1, w, h],
+        bbox=[0, y_top, w, y_bottom],
         text=text,
         confidence=1.0,
     )
@@ -105,10 +140,24 @@ def _detect_yolo(frame: np.ndarray, model) -> list[PerceptionElement]:
     return elements
 
 
+_DEBUG_FRAME_SAVED = False
+
 def analyse_frame(frame_b64: str) -> list[PerceptionElement]:
+    global _DEBUG_FRAME_SAVED
     frame = _decode_frame(frame_b64)
     if frame is None:
         return []
+
+    if not _DEBUG_FRAME_SAVED:
+        _DEBUG_FRAME_SAVED = True
+        try:
+            from PIL import Image
+            h, w = frame.shape[:2]
+            print(f"[analyse_frame] frame size: {w}x{h}", flush=True)
+            Image.fromarray(frame).save("debug_capture.png")
+            print("[analyse_frame] saved debug_capture.png in backend working dir", flush=True)
+        except Exception as e:
+            print(f"[analyse_frame] debug save failed: {e}", flush=True)
 
     elements: list[PerceptionElement] = []
 

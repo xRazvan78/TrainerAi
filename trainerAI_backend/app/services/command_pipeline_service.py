@@ -70,6 +70,7 @@ async def safe_run_week2_command_pipeline(
         asyncio.TimeoutError,
         ValueError,
         TypeError,
+        AttributeError,
         httpx.HTTPError,
     ) as exc:
         logger.error("pipeline failed: %s: %s", type(exc).__name__, exc)

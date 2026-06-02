@@ -1,3 +1,4 @@
+import json
 from typing import Any
 
 import asyncpg
@@ -16,6 +17,14 @@ def _extract_active_tool(command_text: str) -> str:
     return cleaned.upper() if cleaned else "UNKNOWN"
 
 
+# Words that appear in AutoCAD's command-line UI but are not command names.
+_AUTOCAD_UI_WORDS = frozenset({
+    "MODEL", "LAYOUT", "SPECIFY", "FIRST", "NEXT", "POINT", "ENTER",
+    "SELECT", "OBJECTS", "LAYER", "OR", "TYPE", "COMMAND", "RETURN",
+    "PRESS", "ESC", "CANCEL", "CLOSE", "YES", "NO", "ALL", "LAST",
+})
+
+
 def _extract_active_tool_from_perception(perception_state: dict | None) -> str | None:
     if not perception_state:
         return None
@@ -25,10 +34,11 @@ def _extract_active_tool_from_perception(perception_state: dict | None) -> str |
         text = (el.get("text") or "").strip().upper()
         if not text:
             continue
-        text = text.removeprefix("COMMAND: ").strip()
-        parts = text.split()
-        if parts:
-            return parts[0]
+        # Scan every word for the first that looks like an AutoCAD command:
+        # all-alpha, 2–20 chars, not a common UI word.
+        for word in text.split():
+            if word.isalpha() and 2 <= len(word) <= 20 and word not in _AUTOCAD_UI_WORDS:
+                return word
     return None
 
 
@@ -67,9 +77,16 @@ async def update_session_from_command(
 
     active_tool = _extract_active_tool(command.text)
     latest_perception_row = await crud.get_latest_perception_state(pool, command.session_id)
-    perception_payload = (
-        latest_perception_row["payload"] if latest_perception_row else None
-    )
+    perception_payload = None
+    if latest_perception_row:
+        raw = latest_perception_row.get("payload")
+        if isinstance(raw, dict):
+            perception_payload = raw
+        elif isinstance(raw, str):
+            try:
+                perception_payload = json.loads(raw)
+            except (ValueError, TypeError):
+                pass
     perception_tool = _extract_active_tool_from_perception(perception_payload)
     if perception_tool:
         active_tool = perception_tool
@@ -110,9 +127,14 @@ async def build_context_packet_foundation(
 
     perception_payload = None
     if latest_perception is not None:
-        payload = latest_perception.get("payload")
-        if isinstance(payload, dict):
-            perception_payload = payload
+        raw = latest_perception.get("payload")
+        if isinstance(raw, dict):
+            perception_payload = raw
+        elif isinstance(raw, str):
+            try:
+                perception_payload = json.loads(raw)
+            except (ValueError, TypeError):
+                pass
 
     return ContextPacketFoundation(
         task_id=task_id,

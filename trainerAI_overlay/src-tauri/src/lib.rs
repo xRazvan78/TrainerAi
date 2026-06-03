@@ -29,11 +29,11 @@ pub fn run() {
                         let rel_x = cursor.x - win_pos.x as f64;
                         let rel_y = cursor.y - win_pos.y as f64;
 
-                        // The overlay panel is in the top-left corner:
-                        //   margin 20px + width 320px + padding → x: 0–400
-                        //   margin 20px + height ~850px (plan panel open) → y: 0–900
-                        let in_panel = (0.0..400.0).contains(&rel_x)
-                            && (0.0..900.0).contains(&rel_y);
+                        // Interactive region is driven dynamically by the frontend via
+                        // set_interactive_region — updated when the panel toggles between
+                        // full sidebar and minimized square.
+                        let (rx, ry, rw, rh) = commands::interactive_rect();
+                        let in_panel = (rx..rx + rw).contains(&rel_x) && (ry..ry + rh).contains(&rel_y);
 
                         let _ = window_clone.set_ignore_cursor_events(!in_panel);
                     }
@@ -69,6 +69,7 @@ pub fn run() {
             commands::plan_message,
             commands::plan_advance,
             commands::plan_clear,
+            commands::set_interactive_region,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

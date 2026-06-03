@@ -1,4 +1,5 @@
 use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Mutex;
 use std::sync::OnceLock;
 use std::time::Duration;
 
@@ -10,6 +11,18 @@ use crate::capture::{capture_window_frame, find_autocad_hwnd, hamming};
 
 static CAPTURE_RUNNING: AtomicBool = AtomicBool::new(false);
 static HTTP_CLIENT: OnceLock<reqwest::Client> = OnceLock::new();
+
+// Current interactive (non-click-through) rectangle: (x, y, w, h) in physical pixels,
+// relative to the window's top-left. Defaults to the expanded-sidebar bounds.
+static INTERACTIVE_RECT: OnceLock<Mutex<(f64, f64, f64, f64)>> = OnceLock::new();
+
+fn interactive_rect_cell() -> &'static Mutex<(f64, f64, f64, f64)> {
+    INTERACTIVE_RECT.get_or_init(|| Mutex::new((0.0, 0.0, 412.0, 1040.0)))
+}
+
+pub fn interactive_rect() -> (f64, f64, f64, f64) {
+    *interactive_rect_cell().lock().unwrap_or_else(|e| e.into_inner())
+}
 
 #[tauri::command]
 pub fn set_clickthrough(window: WebviewWindow, enabled: bool) -> Result<(), String> {
@@ -160,4 +173,9 @@ pub async fn plan_advance() -> Result<(), String> {
 #[tauri::command]
 pub async fn plan_clear() -> Result<(), String> {
     post_plan("clear", serde_json::json!({ "session_id": session_id() })).await
+}
+
+#[tauri::command]
+pub fn set_interactive_region(x: f64, y: f64, w: f64, h: f64) {
+    *interactive_rect_cell().lock().unwrap_or_else(|e| e.into_inner()) = (x, y, w, h);
 }

@@ -42,36 +42,51 @@ pub async fn connect_and_stream(
                 eprintln!("[ws_client] connected to {url}");
                 let _ = tauri::Emitter::emit(&app, "guidance-ws-status", WsStatus { connected: true });
                 backoff = Duration::from_secs(1); // reset on successful connect
-                while let Some(Ok(msg)) = ws.next().await {
-                    if let Message::Text(text) = msg {
-                        // Try JSON first for control messages
-                        if let Ok(val) = serde_json::from_str::<serde_json::Value>(&text) {
-                            match val.get("type").and_then(|t| t.as_str()) {
-                                Some("done") => {
-                                    let _ = tauri::Emitter::emit(
-                                        &app,
-                                        "guidance-token",
-                                        GuidanceToken { token: String::new(), done: true },
-                                    );
-                                }
-                                Some("ping") => {} // keepalive, ignore
-                                _ => {
-                                    // Unknown JSON shape — treat as token
-                                    let _ = tauri::Emitter::emit(
-                                        &app,
-                                        "guidance-token",
-                                        GuidanceToken { token: text, done: false },
-                                    );
-                                }
-                            }
-                        } else {
-                            // Raw text token (not JSON)
-                            let _ = tauri::Emitter::emit(
-                                &app,
-                                "guidance-token",
-                                GuidanceToken { token: text, done: false },
-                            );
+                // Re-emit the connected status periodically: the initial emit above
+                // can race the webview's event listener registration at startup and
+                // be lost (Tauri doesn't replay events), leaving the status dot stuck.
+                let mut status_tick = tokio::time::interval(Duration::from_secs(3));
+                loop {
+                    let msg = tokio::select! {
+                        m = ws.next() => m,
+                        _ = status_tick.tick() => {
+                            let _ = tauri::Emitter::emit(&app, "guidance-ws-status", WsStatus { connected: true });
+                            continue;
                         }
+                    };
+                    let Some(Ok(Message::Text(text))) = msg else {
+                        match msg {
+                            Some(Ok(_)) => continue, // non-text frame (pong/binary)
+                            _ => break,              // stream closed or errored
+                        }
+                    };
+                    // Try JSON first for control messages
+                    if let Ok(val) = serde_json::from_str::<serde_json::Value>(&text) {
+                        match val.get("type").and_then(|t| t.as_str()) {
+                            Some("done") => {
+                                let _ = tauri::Emitter::emit(
+                                    &app,
+                                    "guidance-token",
+                                    GuidanceToken { token: String::new(), done: true },
+                                );
+                            }
+                            Some("ping") => {} // keepalive, ignore
+                            _ => {
+                                // Unknown JSON shape — treat as token
+                                let _ = tauri::Emitter::emit(
+                                    &app,
+                                    "guidance-token",
+                                    GuidanceToken { token: text, done: false },
+                                );
+                            }
+                        }
+                    } else {
+                        // Raw text token (not JSON)
+                        let _ = tauri::Emitter::emit(
+                            &app,
+                            "guidance-token",
+                            GuidanceToken { token: text, done: false },
+                        );
                     }
                 }
                 let _ = tauri::Emitter::emit(&app, "guidance-ws-status", WsStatus { connected: false });

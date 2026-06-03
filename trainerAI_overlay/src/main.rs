@@ -57,7 +57,7 @@ struct TokenPayload {
 
 #[component]
 fn App() -> Element {
-    let mut guidance_text = use_signal(|| "Așteptând activitate AutoCAD...".to_string());
+    let mut guidance_text = use_signal(|| "Waiting for AutoCAD activity...".to_string());
     let mut is_streaming = use_signal(|| false);
     let mut capturing = use_signal(|| false);
     let mut ws_connected = use_signal(|| false);
@@ -444,7 +444,7 @@ fn App() -> Element {
                         button {
                             class: "btn",
                             onclick: move |_| {
-                                guidance_text.set("Așteptând activitate AutoCAD...".to_string());
+                                guidance_text.set("Waiting for AutoCAD activity...".to_string());
                                 is_streaming.set(false);
                             },
                             "Clear"

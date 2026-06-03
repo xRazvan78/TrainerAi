@@ -163,10 +163,13 @@ def test_perception_with_active_plan_auto_advances(monkeypatch):
         "create_perception_state",
         fake_create_perception_state,
     )
+    # Frame 1 detects LINE (engages step 0), frame 2 detects TRIM (user moved
+    # on -> step 0 completes and the plan advances).
+    detected_tools = iter(["LINE", "TRIM"])
     monkeypatch.setattr(
         perception_router_module,
         "_extract_active_tool_from_perception",
-        lambda _: "LINE",
+        lambda _: next(detected_tools),
     )
     monkeypatch.setattr(
         perception_router_module,
@@ -180,6 +183,12 @@ def test_perception_with_active_plan_auto_advances(monkeypatch):
     )
 
     with _build_client(monkeypatch) as client:
+        first = client.post("/api/perception/state", json=_PERCEPTION_PAYLOAD)
+        assert first.status_code == 201
+        # Engaged only — still on step 0, nothing broadcast yet.
+        assert plan_service._plans["default-session"].current_index == 0
+        mock_broadcast.assert_not_called()
+
         response = client.post("/api/perception/state", json=_PERCEPTION_PAYLOAD)
 
     assert response.status_code == 201

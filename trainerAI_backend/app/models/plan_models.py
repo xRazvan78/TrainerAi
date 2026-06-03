@@ -9,6 +9,7 @@ class ChatMessage(BaseModel):
 class PlanStep(BaseModel):
     index: int
     instruction: str
+    detail: str | None = None
     expected_tool: str | None = None
     status: Literal["pending", "active", "done"] = "pending"
 

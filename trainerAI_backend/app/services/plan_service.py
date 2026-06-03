@@ -9,6 +9,11 @@ from app.services import llm_service, rag_service
 logger = logging.getLogger(__name__)
 
 _plans: dict[str, Plan] = {}
+# Per-session index of the step the user is actively working in: set once the
+# step's expected tool is detected ("engaged"), and consumed when they switch
+# to a different tool. This makes a step complete when the user MOVES ON from
+# its tool, not the instant they select it.
+_engaged: dict[str, int] = {}
 
 
 def _normalize_tool(tool: str | None) -> str:
@@ -26,6 +31,7 @@ def has_active_plan(session_id: str) -> bool:
 
 def clear(session_id: str) -> None:
     _plans.pop(session_id, None)
+    _engaged.pop(session_id, None)
 
 
 async def generate_plan(pool, session_id: str, goal: str) -> Plan:
@@ -41,19 +47,21 @@ async def generate_plan(pool, session_id: str, goal: str) -> Plan:
         PlanStep(
             index=i,
             instruction=s.get("instruction", ""),
+            detail=(s.get("detail") or "").strip() or None,
             expected_tool=_normalize_tool(s.get("expected_tool")) or None,
             status="active" if i == 0 else "pending",
         )
         for i, s in enumerate(raw_steps)
     ]
 
-    step_summary = "\n".join(
-        f"{i + 1}. {s.instruction}" + (f" [{s.expected_tool}]" if s.expected_tool else "")
-        for i, s in enumerate(steps)
-    )
+    # Short conversational intro — the steps themselves render as the checklist,
+    # so the chat bubble must NOT repeat them (avoids the duplicated text dump).
     plan_message = ChatMessage(
         role="assistant",
-        content=f"Here is your plan for: {goal}\n\n{step_summary}",
+        content=(
+            f"Here's a {len(steps)}-step plan for that. "
+            "Follow the checklist — I'll tick off steps as you go, and you can ask me anything."
+        ),
     )
 
     plan = Plan(
@@ -64,6 +72,7 @@ async def generate_plan(pool, session_id: str, goal: str) -> Plan:
         messages=[plan_message],
     )
     _plans[session_id] = plan
+    _engaged.pop(session_id, None)
     return plan
 
 
@@ -76,9 +85,20 @@ def try_advance(session_id: str, detected_tool: str | None) -> Plan | None:
     if not current_step.expected_tool:
         return None
 
-    if _normalize_tool(detected_tool) != current_step.expected_tool:
+    detected = _normalize_tool(detected_tool)
+
+    if detected == current_step.expected_tool:
+        # User is on the right tool — mark the step engaged but keep it active.
+        # It only completes once they move on to a different tool.
+        _engaged[session_id] = plan.current_index
         return None
 
+    # A different, real tool is selected. If the current step was engaged,
+    # switching away from its tool means the user finished it — advance now.
+    if not detected or _engaged.get(session_id) != plan.current_index:
+        return None
+
+    _engaged.pop(session_id, None)
     current_step.status = "done"
     plan.current_index += 1
     if plan.current_index < len(plan.steps):
@@ -92,6 +112,7 @@ def advance_manual(session_id: str) -> Plan | None:
     if plan is None or plan.current_index >= len(plan.steps):
         return None
 
+    _engaged.pop(session_id, None)
     plan.steps[plan.current_index].status = "done"
     plan.current_index += 1
     if plan.current_index < len(plan.steps):

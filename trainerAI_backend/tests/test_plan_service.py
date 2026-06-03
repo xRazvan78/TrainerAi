@@ -14,8 +14,10 @@ from app.services import plan_service
 @pytest.fixture(autouse=True)
 def reset_plans():
     plan_service._plans.clear()
+    plan_service._engaged.clear()
     yield
     plan_service._plans.clear()
+    plan_service._engaged.clear()
 
 
 # ---------------------------------------------------------------------------
@@ -38,23 +40,53 @@ def _two_step_plan(session_id: str = "sid") -> Plan:
 # Tests
 # ---------------------------------------------------------------------------
 
-def test_try_advance_matches_and_advances():
+def test_try_advance_engages_but_does_not_advance_on_match():
+    """Selecting the step's tool engages it but keeps it active — no premature jump."""
     plan = _two_step_plan()
     plan_service._plans["sid"] = plan
 
     result = plan_service.try_advance("sid", "polygon")  # lowercase — tests normalization
 
+    assert result is None
+    assert plan.steps[0].status == "active"
+    assert plan.current_index == 0
+    assert plan_service._engaged["sid"] == 0
+
+
+def test_try_advance_completes_when_moving_to_next_tool():
+    """After engaging a step, switching to a different tool completes it and advances."""
+    plan = _two_step_plan()
+    plan_service._plans["sid"] = plan
+
+    assert plan_service.try_advance("sid", "POLYGON") is None  # engage step 0
+    result = plan_service.try_advance("sid", "TRIM")           # move on -> complete
+
     assert result is not None
     assert plan.steps[0].status == "done"
     assert plan.current_index == 1
     assert plan.steps[1].status == "active"
+    assert "sid" not in plan_service._engaged
 
 
-def test_try_advance_no_match_noop():
+def test_try_advance_no_advance_before_engaged():
+    """A different tool with no prior engagement does nothing (you never used this step's tool)."""
     plan = _two_step_plan()
     plan_service._plans["sid"] = plan
 
     result = plan_service.try_advance("sid", "LINE")
+
+    assert result is None
+    assert plan_service._plans["sid"].current_index == 0
+    assert plan_service._plans["sid"].steps[0].status == "active"
+
+
+def test_try_advance_idle_does_not_complete_engaged_step():
+    """Losing the tool detection (idle) must not complete an engaged step."""
+    plan = _two_step_plan()
+    plan_service._plans["sid"] = plan
+
+    assert plan_service.try_advance("sid", "POLYGON") is None  # engage step 0
+    result = plan_service.try_advance("sid", None)             # OCR lost the tool
 
     assert result is None
     assert plan_service._plans["sid"].current_index == 0

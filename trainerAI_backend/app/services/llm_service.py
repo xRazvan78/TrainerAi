@@ -104,8 +104,12 @@ _PLAN_SYSTEM_PROMPT = """You are an expert AutoCAD instructor. Given a build goa
 knowledge, produce an ordered, concrete plan to accomplish it in AutoCAD.
 Ground the plan in the provided knowledge; you MAY use your general AutoCAD knowledge to fill gaps.
 Return ONLY JSON of the form:
-{"steps": [{"instruction": "<one clear action>", "expected_tool": "<primary AutoCAD command, e.g. LINE, POLYGON, FILLET, or null>"}]}
-Keep instructions short and actionable. 4–10 steps. Use uppercase AutoCAD command names."""
+{"steps": [{"instruction": "<short imperative action, max ~8 words>", "detail": "<1-2 sentences explaining HOW: the exact command flow, key parameters/values to type, and where to click>", "expected_tool": "<primary AutoCAD command, e.g. LINE, POLYGON, FILLET, or null>"}]}
+The instruction is a terse checklist line; put all the how-to in detail. Be specific in detail
+(coordinates, dimensions, option keywords, Enter presses). 4–8 steps. Use uppercase AutoCAD command names.
+Keep one continuous action that uses a single command as ONE step (describe the repetitions in detail) —
+do not split it across several steps. Only put the same command in consecutive steps when they are
+genuinely separate operations. Prefer giving adjacent steps different expected_tool values where natural."""
 
 _CHAT_SYSTEM_PROMPT = """You are an AutoCAD tutor guiding a user through an active build plan.
 Be concise and practical. Reference the current step. Answer follow-up questions, and if asked,

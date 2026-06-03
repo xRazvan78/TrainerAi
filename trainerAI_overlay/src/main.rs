@@ -26,6 +26,8 @@ struct ChatMsg {
 struct StepView {
     index: usize,
     instruction: String,
+    #[serde(default)]
+    detail: Option<String>,
     expected_tool: Option<String>,
     status: String,
 }
@@ -70,6 +72,9 @@ fn App() -> Element {
 
     let mut minimized = use_signal(|| false);
     let mut plan_collapsed = use_signal(|| false);
+    // Indices of steps the user manually expanded to peek their detail. The
+    // active step always shows its detail regardless of this set.
+    let mut expanded_steps = use_signal(Vec::<usize>::new);
 
     use_hook(|| {
         let js = r#"(function () {
@@ -283,6 +288,18 @@ fn App() -> Element {
         String::new()
     };
 
+    // The active step won't auto-advance if the next step uses the same tool
+    // (selecting that tool again is indistinguishable from continuing this step),
+    // so nudge the user toward the manual Next button in that case.
+    let same_tool_next = {
+        let steps = plan_steps.read();
+        let cur = *plan_current.read();
+        match (steps.get(cur), steps.get(cur + 1)) {
+            (Some(a), Some(b)) => a.expected_tool.is_some() && a.expected_tool == b.expected_tool,
+            _ => false,
+        }
+    };
+
     rsx! {
         style { "
             html, body, #main, #dioxus-root {{ background: transparent !important; background-color: transparent !important; margin: 0; padding: 0; overflow: hidden; width: 100vw; height: 100vh; }}
@@ -316,15 +333,23 @@ fn App() -> Element {
 
             .steps {{ display: flex; flex-direction: column; gap: 2px; overflow-y: auto; max-height: 38vh; min-height: 0; }}
             .step {{ display: flex; gap: 9px; align-items: flex-start; padding: 6px 8px; border-radius: 8px; font-size: 0.8rem; line-height: 1.4; color: rgba(255,255,255,0.6); }}
+            .step.clickable {{ cursor: pointer; }}
+            .step.clickable:hover {{ background: rgba(255,255,255,0.05); }}
+            .step.active.clickable:hover {{ background: rgba(61,220,151,0.14); }}
             .step.active {{ background: rgba(61,220,151,0.1); color: rgba(255,255,255,0.95); }}
             .step.done {{ color: rgba(255,255,255,0.34); }}
             .mark {{ flex: none; width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 0.58rem; margin-top: 1px; }}
             .step.active .mark {{ border-color: #3ddc97; color: #3ddc97; }}
             .step.done .mark {{ background: #3ddc97; border-color: #3ddc97; color: #0c1410; }}
+            .step-body {{ flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }}
+            .step-detail {{ font-size: 0.73rem; line-height: 1.45; color: rgba(255,255,255,0.58); }}
+            .step-caret {{ flex: none; font-size: 0.6rem; color: rgba(255,255,255,0.3); margin-top: 3px; transition: transform 0.18s; }}
+            .step-caret.open {{ transform: rotate(90deg); color: rgba(255,255,255,0.5); }}
             .chip {{ font-size: 0.62rem; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.55); padding: 1px 6px; border-radius: 5px; margin-left: 6px; white-space: nowrap; }}
 
             .next {{ flex-shrink: 0; height: 34px; border: 1px solid rgba(61,220,151,0.4); border-radius: 9px; background: rgba(61,220,151,0.12); color: #7ef0bd; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }}
             .next:hover {{ background: rgba(61,220,151,0.2); }}
+            .next-hint {{ flex-shrink: 0; font-size: 0.7rem; line-height: 1.4; color: rgba(255,255,255,0.5); text-align: center; }}
 
             .chat {{ display: flex; flex-direction: column; gap: 6px; overflow-y: auto; max-height: 200px; min-height: 0; padding-right: 2px; }}
             .bubble {{ max-width: 82%; padding: 7px 10px; border-radius: 12px; font-size: 0.8rem; line-height: 1.4; word-wrap: break-word; }}
@@ -393,6 +418,7 @@ fn App() -> Element {
                                 plan_messages.set(vec![]);
                                 plan_current.set(0);
                                 plan_streaming.set(false);
+                                expanded_steps.set(vec![]);
                             },
                             "New"
                         }
@@ -405,6 +431,7 @@ fn App() -> Element {
                                 plan_messages.set(vec![]);
                                 plan_current.set(0);
                                 plan_streaming.set(false);
+                                expanded_steps.set(vec![]);
                             },
                             "Exit"
                         }
@@ -448,17 +475,46 @@ fn App() -> Element {
                                         "active" => "▸",
                                         _ => "",
                                     };
-                                    let cls = format!("step {}", step.status);
                                     let tool = step.expected_tool.clone().unwrap_or_default();
                                     let instruction = step.instruction.clone();
+                                    let is_active = step.status == "active";
+                                    let detail = step.detail.clone().unwrap_or_default();
+                                    let has_detail = !detail.is_empty();
+                                    let idx = step.index;
+                                    let show_detail = has_detail
+                                        && (is_active || expanded_steps.read().contains(&idx));
+                                    let cls = format!(
+                                        "step {}{}",
+                                        step.status,
+                                        if has_detail { " clickable" } else { "" },
+                                    );
+                                    let caret_cls = if show_detail { "step-caret open" } else { "step-caret" };
                                     rsx! {
-                                        div { class: "{cls}",
-                                            span { class: "mark", "{mark}" }
-                                            span {
-                                                "{instruction}"
-                                                if !tool.is_empty() {
-                                                    span { class: "chip", "{tool}" }
+                                        div {
+                                            class: "{cls}",
+                                            onclick: move |_| {
+                                                if !has_detail { return; }
+                                                let mut set = expanded_steps.write();
+                                                if let Some(pos) = set.iter().position(|&x| x == idx) {
+                                                    set.remove(pos);
+                                                } else {
+                                                    set.push(idx);
                                                 }
+                                            },
+                                            span { class: "mark", "{mark}" }
+                                            div { class: "step-body",
+                                                div { class: "step-instr",
+                                                    span { "{instruction}" }
+                                                    if !tool.is_empty() {
+                                                        span { class: "chip", "{tool}" }
+                                                    }
+                                                }
+                                                if show_detail {
+                                                    div { class: "step-detail", "{detail}" }
+                                                }
+                                            }
+                                            if has_detail {
+                                                span { class: "{caret_cls}", "▸" }
                                             }
                                         }
                                     }
@@ -466,6 +522,9 @@ fn App() -> Element {
                             }
 
                             if !plan_steps.read().is_empty() {
+                                if same_tool_next {
+                                    div { class: "next-hint", "Same tool next — tap Next when you finish this one" }
+                                }
                                 button {
                                     class: "next",
                                     onclick: move |_| {

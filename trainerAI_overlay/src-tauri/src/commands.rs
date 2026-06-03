@@ -30,8 +30,7 @@ pub async fn start_capture() -> Result<String, String> {
         return Err("invalid BACKEND_URL".into());
     }
 
-    let session_id = std::env::var("SESSION_ID")
-        .unwrap_or_else(|_| "default-session".into());
+    let session_id = session_id();
     // Temporary stub — Phase F replaces this with real session management.
 
     tokio::spawn(async move {
@@ -104,8 +103,7 @@ pub async fn send_command(text: String) -> Result<(), String> {
     if !backend.starts_with("http://localhost") && !backend.starts_with("http://127.0.0.1") {
         return Err("invalid BACKEND_URL".into());
     }
-    let session_id = std::env::var("SESSION_ID")
-        .unwrap_or_else(|_| "default-session".to_string());
+    let session_id = session_id();
 
     let body = serde_json::json!({
         "text": text,
@@ -122,4 +120,44 @@ pub async fn send_command(text: String) -> Result<(), String> {
         .and_then(|r| r.error_for_status())
         .map(|_| ())
         .map_err(|e| e.to_string())
+}
+
+fn session_id() -> String {
+    std::env::var("SESSION_ID").unwrap_or_else(|_| "default-session".into())
+}
+
+async fn post_plan(path: &str, body: serde_json::Value) -> Result<(), String> {
+    let backend = std::env::var("BACKEND_URL").unwrap_or_else(|_| "http://localhost:8000".into());
+    if !backend.starts_with("http://localhost") && !backend.starts_with("http://127.0.0.1") {
+        return Err("invalid BACKEND_URL".into());
+    }
+    let client = HTTP_CLIENT.get_or_init(reqwest::Client::new);
+    client
+        .post(format!("{backend}/api/plan/{path}"))
+        .json(&body)
+        .send()
+        .await
+        .and_then(|r| r.error_for_status())
+        .map(|_| ())
+        .map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+pub async fn plan_create(goal: String) -> Result<(), String> {
+    post_plan("create", serde_json::json!({ "session_id": session_id(), "goal": goal })).await
+}
+
+#[tauri::command]
+pub async fn plan_message(text: String) -> Result<(), String> {
+    post_plan("message", serde_json::json!({ "session_id": session_id(), "text": text })).await
+}
+
+#[tauri::command]
+pub async fn plan_advance() -> Result<(), String> {
+    post_plan("advance", serde_json::json!({ "session_id": session_id() })).await
+}
+
+#[tauri::command]
+pub async fn plan_clear() -> Result<(), String> {
+    post_plan("clear", serde_json::json!({ "session_id": session_id() })).await
 }

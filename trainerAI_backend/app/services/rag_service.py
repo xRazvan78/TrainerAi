@@ -80,3 +80,39 @@ async def safe_retrieve_context_documents(
         )
     except (asyncpg.PostgresError, OSError, RuntimeError, asyncio.TimeoutError):
         return []
+
+
+async def retrieve_for_query(
+    pool: asyncpg.Pool,
+    query_text: str,
+    min_similarity: float = DEFAULT_MIN_SIMILARITY,
+    top_k: int = DEFAULT_TOP_K,
+    token_budget: int = DEFAULT_TOKEN_BUDGET,
+) -> list[dict[str, Any]]:
+    query_embedding = embed_text(query_text)
+    results = await crud.query_similar_embeddings(
+        pool=pool,
+        embedding=query_embedding,
+        min_similarity=min_similarity,
+        limit=top_k,
+    )
+    return _apply_token_budget(results, token_budget)
+
+
+async def safe_retrieve_for_query(
+    pool: asyncpg.Pool,
+    query_text: str,
+    min_similarity: float = DEFAULT_MIN_SIMILARITY,
+    top_k: int = DEFAULT_TOP_K,
+    token_budget: int = DEFAULT_TOKEN_BUDGET,
+) -> list[dict[str, Any]]:
+    try:
+        return await retrieve_for_query(
+            pool=pool,
+            query_text=query_text,
+            min_similarity=min_similarity,
+            top_k=top_k,
+            token_budget=token_budget,
+        )
+    except (asyncpg.PostgresError, OSError, RuntimeError, asyncio.TimeoutError):
+        return []

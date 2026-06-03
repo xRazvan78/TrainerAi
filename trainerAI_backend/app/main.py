@@ -7,6 +7,7 @@ from app.routers.command import router as command_router
 from app.routers.db_crud import router as db_router
 from app.routers.guidance import router as guidance_router
 from app.routers.perception import router as perception_router
+from app.routers.plan import router as plan_router
 
 
 @asynccontextmanager
@@ -27,6 +28,7 @@ def create_app() -> FastAPI:
     app.include_router(command_router)
     app.include_router(perception_router)
     app.include_router(guidance_router)
+    app.include_router(plan_router)
     return app
 
 

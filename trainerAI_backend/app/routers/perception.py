@@ -9,7 +9,7 @@ from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request,
 from app.db import crud
 from app.models.command_models import CommandRequest
 from app.models.perception_models import PerceptionStatePersistedResponse, PerceptionStateRequest
-from app.services import guidance_trigger_service
+from app.services import guidance_trigger_service, plan_broadcaster, plan_service
 from app.services.command_pipeline_service import safe_run_week2_command_pipeline
 from app.services.perception_service import analyse_frame
 from app.services.session_state_service import _extract_active_tool_from_perception
@@ -59,6 +59,19 @@ async def ingest_perception_state(
 
     active_tool = _extract_active_tool_from_perception(payload.model_dump(mode="python"))
     print(f"[perception] active_tool={active_tool!r} should_trigger={guidance_trigger_service.should_trigger(session_id, active_tool) if active_tool else 'n/a'}", flush=True)
+
+    if plan_service.has_active_plan(session_id):
+        if active_tool:
+            advanced = plan_service.try_advance(session_id, active_tool)
+            if advanced is not None:
+                await plan_broadcaster.broadcast_step(session_id, advanced)
+        return PerceptionStatePersistedResponse(
+            status="persisted",
+            perception_id=int(perception_id),
+            session_id=str(session_id),
+            observed_at=str(observed_at),
+        )
+
     if active_tool and guidance_trigger_service.should_trigger(session_id, active_tool):
         guidance_trigger_service.mark_triggered(session_id, active_tool)
         print(f"[perception] TRIGGER FIRED for tool={active_tool!r} session={session_id}", flush=True)

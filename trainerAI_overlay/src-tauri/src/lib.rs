@@ -30,10 +30,10 @@ pub fn run() {
                         let rel_y = cursor.y - win_pos.y as f64;
 
                         // The overlay panel is in the top-left corner:
-                        //   margin 20px + width 320px + padding → x: 0–370
-                        //   margin 20px + height ~500px + padding → y: 0–540
-                        let in_panel = (0.0..370.0).contains(&rel_x)
-                            && (0.0..540.0).contains(&rel_y);
+                        //   margin 20px + width 320px + padding → x: 0–400
+                        //   margin 20px + height ~850px (plan panel open) → y: 0–900
+                        let in_panel = (0.0..400.0).contains(&rel_x)
+                            && (0.0..900.0).contains(&rel_y);
 
                         let _ = window_clone.set_ignore_cursor_events(!in_panel);
                     }
@@ -49,6 +49,15 @@ pub fn run() {
                 ws_client::connect_and_stream(app_handle_ws, session_id, backend_ws).await;
             });
 
+            let app_handle_plan = app.handle().clone();
+            tauri::async_runtime::spawn(async move {
+                let session_id = std::env::var("SESSION_ID")
+                    .unwrap_or_else(|_| "default-session".to_string());
+                let backend_ws = std::env::var("BACKEND_WS_URL")
+                    .unwrap_or_else(|_| "ws://localhost:8000".to_string());
+                ws_client::connect_and_stream_plan(app_handle_plan, session_id, backend_ws).await;
+            });
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -56,6 +65,10 @@ pub fn run() {
             commands::start_capture,
             commands::stop_capture,
             commands::send_command,
+            commands::plan_create,
+            commands::plan_message,
+            commands::plan_advance,
+            commands::plan_clear,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

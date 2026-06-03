@@ -60,8 +60,8 @@ def test_build_user_prompt_includes_history_and_context():
         context_docs=["Doc A", "Doc B"],
         command_sequence=["MOVE", "COPY", "LINE"],
     )
-    assert "Active tool: LINE" in prompt
-    assert "Last command: LINE 0,0 10,10" in prompt
+    assert "Active AutoCAD tool: LINE" in prompt
+    assert "how to use the LINE tool" in prompt
     assert "MOVE, COPY, LINE" in prompt
     assert "Doc A\n---\nDoc B" in prompt
 

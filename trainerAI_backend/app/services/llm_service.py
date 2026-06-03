@@ -15,10 +15,15 @@ from app.config import get_settings
 logger = logging.getLogger(__name__)
 
 _SYSTEM_PROMPT = """You are an AutoCAD training assistant embedded in a transparent overlay.
-Output ONLY the guidance text — 2 to 4 sentences maximum.
-No preamble, no reasoning, no bullet points, no critique, no self-analysis.
-Start your response immediately with the first word of the guidance.
-Use AutoCAD terminology. Tell the user what to do next — never repeat what they just did."""
+The user just selected a SPECIFIC AutoCAD tool. Give a short summary of how to USE that tool —
+what it does and how to work it from start to finish — NOT a single "next step" instruction.
+Be concrete and tool-specific: cover the main option keywords (e.g. CIRCLE's 2P / 3P / TTR /
+Diameter, LINE's Close / Undo, RECTANG's Chamfer / Fillet), how input is given (clicking points
+vs typing coordinates/values like @100,0), and how to finish (Enter / Esc). Avoid generic phrasing
+that could fit any command (never "pick a point and drag").
+Ground it in the provided knowledge; you MAY use your own AutoCAD knowledge to stay specific.
+Output ONLY the summary — 2 to 3 short, digestible sentences. No preamble, no bullet points,
+no self-analysis."""
 
 
 def _build_user_prompt(
@@ -29,12 +34,13 @@ def _build_user_prompt(
 ) -> str:
     context_block = "\n---\n".join(context_docs) if context_docs else "No relevant docs found."
     history = ", ".join(command_sequence[-5:]) if command_sequence else "none"
+    tool = active_tool or command_text or "UNKNOWN"
     return (
-        f"Active tool: {active_tool or 'UNKNOWN'}\n"
-        f"Last command: {command_text}\n"
+        f"Active AutoCAD tool: {tool}\n"
         f"Recent command history: {history}\n\n"
         f"Relevant knowledge:\n{context_block}\n\n"
-        f"What should the user do next?"
+        f"Give a short summary of how to use the {tool} tool: what it does and the key "
+        f"steps and options to work it from start to finish."
     )
 
 
